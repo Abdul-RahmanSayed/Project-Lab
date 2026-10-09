@@ -1,0 +1,41 @@
+{
+  "formatVersion": 1,
+  "source": {
+    "revision": "6496e08754e428c87900c272ba61bcae86f2b9f5",
+    "modifiedPolicyFiles": [
+      "part2.py"
+    ],
+    "revisionKind": "local-working-tree",
+    "files": {
+      "pyproject.toml": "bd9c035cfb5791af963a551fa82425282b2585ba697735536039e1dec6dae93e",
+      "part1.js": "e1d21790fc704bd04f0db8384a03d7450659ea5061c408a336b9158009f24454",
+      "part2.py": "ebfcf1ae059545441fa6bde6e511c933f3118270ccd7ea29700c5eeabfdaa2b5",
+      "requirements.txt": "f8ee45a31d4d909cf3e05e52dd22d45b0d02dff61c6c14ad67942c8f7c293d6b",
+      "fda_core/__init__.py": "8cf1bf51cbd300a5f0149c0d3a2ed28aab8fcf72cae8ad7b7f3051e3c9c66a5e",
+      "fda_core/errors.py": "c0d6411d85f64660ff04d157a90836066645ff8bc298a578d53321e91cdfaf10",
+      "fda_core/policy.py": "6c656b560a7e534aa2d567974025f98c0930e2ac65b0e3f20c198586f7fae24c",
+      "fda_core/validation.py": "f2cb41bf2d5edb9e1c4580aaefa8b3479f9479656b234e6861dc11723c082c6d"
+    }
+  },
+  "coreVersion": "0.1.0",
+  "policyVersion": "fda-core-sha256:a89dcc5c5961f7d7e5b8af99ea9a9ecc8dee4b4abd12e70feae25d66e604a282",
+  "wheel": {
+    "name": "fda_analysis_core-0.1.0-py3-none-any.whl",
+    "sha256": "891cd476d58190e42fecaab2ccc94761c6d49488fbef7f3ca1fd49ddcbdafb46"
+  },
+  "snapshot": {
+    "manifestSha256": "8a81a0be1fc8f22b1733e33edf3ca6a50256a772d2ebe5aa9e5fff6aed3f6862",
+    "snapshotSha256": "2f7ab38cb063859ecc2ace39d7eda363cfd2e72996890a30dd5c71582a9b3f07",
+    "reportCount": 97652,
+    "uniqueReportCount": 97652,
+    "pageCount": 987,
+    "coverageStart": "20020101",
+    "coverageEnd": "20260101",
+    "acquisitionStartedAt": "2026-09-04T18:24:34.942Z",
+    "acquisitionCompletedAt": "2026-09-04T18:29:41.824Z"
+  },
+  "build": {
+    "setuptools": "80.9.0",
+    "sourceDateEpoch": 315532800
+  }
+}

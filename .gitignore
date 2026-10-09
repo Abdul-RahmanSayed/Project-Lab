@@ -1,0 +1,14 @@
+# Local environments and all generated snapshot/benchmark artifacts.
+/.venv/
+/generated/
+__pycache__/
+*.py[cod]
+*.db
+*.db-*
+*.db.building
+*.sqlite
+*.sqlite-*
+*.sqlite.building
+*.sqlite3
+*.sqlite3-*
+*.sqlite3.building
