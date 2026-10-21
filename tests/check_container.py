@@ -175,6 +175,7 @@ def main():
     parser.add_argument("--port", type=int, default=8768)
     parser.add_argument("--rounds", type=int, default=10)
     parser.add_argument("--uncached-rounds", type=int, default=2)
+    parser.add_argument("--memory-log", action="store_true", help="Enable the bounded Linux deployment memory log")
     args = parser.parse_args()
     if not 1 <= args.rounds <= 10 or not 1 <= args.uncached_rounds <= 2:
         parser.error("At most ten default waves and two waves per uncached fixture")
@@ -186,13 +187,15 @@ def main():
     lock = json.loads((ROOT / "deployment/release.lock.json").read_bytes())
     oracle = json.loads(args.oracle.read_bytes())
     results = {"image": json.loads(docker("image", "inspect", args.image))[0], "oracleSha256": sha256_file(args.oracle),
+               "memoryLogEnabled": args.memory_log,
                "method": "Docker Desktop/WSL2 Linux/amd64, 0.1 CPU quota, 512000000-byte RAM/no swap, read-only root and non-root user. Host loopback HTTP full bodies; timing starts before executor submission. Closed-loop waves, not growing queues or hosted/network/wake evidence. No general filtered cache or evictions; the unchanged exact prepared default is reused."}
     container = None
     try:
         container = docker("create", "--pull=never", "--name", "project-lab-local-check-" + uuid.uuid4().hex[:10],
                            "--cpus", ".1", "--memory", "512000000", "--memory-swap", "512000000", "--pids-limit", "64",
                            "--read-only", "--cap-drop", "ALL", "--security-opt", "no-new-privileges",
-                           "--publish", f"127.0.0.1:{args.port}:10000", args.image)
+                           "--publish", f"127.0.0.1:{args.port}:10000",
+                           *(["--env", "FDA_MEMORY_LOG=1"] if args.memory_log else []), args.image)
         results["containerId"] = container
         started = time.perf_counter()
         docker("start", container)
@@ -238,8 +241,8 @@ def main():
     finally:
         if container:
             try:
-                (output / "container.log").write_text(docker("logs", container), encoding="utf-8")
                 docker("stop", "--time", "10", container)
+                (output / "container.log").write_text(docker("logs", container), encoding="utf-8")
                 results["finalState"] = json.loads(docker("inspect", container))[0]["State"]
             finally:
                 docker("rm", "--force", container)

@@ -139,3 +139,83 @@ advisory coverage and hosted acceptance remain unestablished. No deployment,
 publication, service/account creation, portfolio edit, commit or push is authorized
 by this refresh. $0/account checks and explicit approval still precede public steps;
 actual origin/version/fallback/wake/rollback and completion reminders remain pending.
+
+## October 21, 2026: Public Hosting and Archive Authorized
+
+Abdul confirmed Hobby/no-card/no-services and supplied the unused usage allowances,
+then explicitly authorized one Render Free backend, Pages publication and bounded
+hosted tests. After discussing openFDA reuse and unresolved third-party terminology
+questions, he chose to continue and separately approved a public checked archive.
+This is authorization to proceed, not legal or universal security clearance.
+
+The [partial hosted results](SLICE_5_HOSTED_RESULTS.md) record the actual account
+checks, published checksum-matching attachment and first Free API deployment from
+`db52f77`. Persistent auto-deploy and PR previews are off; readiness is `/readyz`.
+Eleven overview fixtures and bounded report/detail parity passed over actual HTTPS.
+The warm default returned 50/50 successes at p95 169.06 ms, maximum 190.52 ms.
+Small repeated/mixed uncached batches passed, and ten concurrent SQL requests
+produced five successes/five explicit busy responses. No data/policy/query pin,
+semantic, cache, admission or deadline changes were made.
+
+The initial new-check-client failure was a mistaken reference-metadata assumption,
+not an application failure; it is retained separately from the successful run.
+Abdul chose to make the narrow Pages-workflow/test commit and push himself. The
+agent has not committed/pushed or changed the portfolio. Pages, actual browser
+integration, provider resource observations, genuine idle wake and rollback remain
+unfinished. Completion follow-ups stay pending until the agreed end-to-end feature
+and separately approved portfolio integration are genuinely verified.
+
+## October 21, 2026: Pages Published and Backend Restored in Rehearsal
+
+After Abdul pushed `88430e7`, the manual Pages workflow successfully published the
+explicitly selected `db52f77` application and unchanged checked release. Its public
+manifest records the actual Render origin and selected code/data pair. Bounded real
+Chrome default/filter/table/report/detail/shared-link/mobile-width checks passed.
+Screenshot tooling failed, so complete hosted visual verification is not claimed.
+One same-data deployment of `88430e7` and provider rollback to the original `db52f77`
+deployment succeeded; an actual filtered browser request worked after restoration.
+This tests infrastructure restoration, not a data migration. Subsequently the
+original Pages deployment job successfully republished its existing artifact and
+the public manifest retained the compatible code/API/data pair. The exact public
+website files are retained locally with checksums; this is not a differently
+versioned frontend rollback or indefinite provider artifact retention.
+
+Render Free gates application memory/CPU charts behind a paid upgrade. No upgrade
+was made and no hosted peak-memory claim substitutes earlier local measurements.
+Genuine idle sleep/wake, remaining fallback/visual evidence and
+the separately approved portfolio integration remain open. The detailed evidence
+and small-sample limitations are in the hosted results; the MVP is not complete.
+
+After over 18 minutes without agent API requests, one timed readiness request
+returned the correct release in 12.69 seconds. Browser automation disconnected
+during the idle wait, so the provider's asleep state and actual cold-browser
+fallback/recovery were not verified. This is a single idle-period observation,
+not a warm-default p95 failure, completed wake-up gate or measured browser load.
+
+## October 21, 2026: Bounded Memory Log and Browser Recovery
+
+Abdul requested restored browser access and a small opt-in memory log, without
+paid tooling. The deployment launcher now supports Linux `FDA_MEMORY_LOG=1`, off
+by default, with at most 200 request samples plus startup/graceful shutdown. It
+records only counters and release/process context, with unavailable counters
+marked unknown. It adds no endpoint, dependency, timer, cache or queue and does
+not change data, policy, query, admission or deadline behavior.
+
+Nine focused tests pass on Windows and installed Linux; all 12 existing Linux API
+regressions and bounded independent-reference HTTP parity pass. Under local
+0.1 CPU/512,000,000-byte constraints, logged cgroup peak was 130.02 MiB and warm
+five-reader default p95 was 85.74 ms (50 successes). These are local measurements
+with logging enabled, not Render memory evidence or an overhead comparison.
+See [results and measurement limitations](SLICE_5_MEMORY_LOG_RESULTS.md).
+
+Chrome restart/extension reopening and Render sign-in restored browser control.
+Desktop screenshots now verify the default and report detail, plus an explicitly
+labeled invalid-release saved-view state. The restored session's viewport override
+did not apply, and neither natural sleep/wake nor actual hosted outage recovery
+was proved. These limitations remain open rather than being inferred from local
+tests or the dashboard's live-deployment badge.
+
+Abdul retains commit/push ownership. The next diagnostic deployment requires his
+pushed commit; it has not happened. Use only the existing Free service, restore
+the log flag to zero after bounded measurement, and retain separate approval for
+portfolio edits. The MVP and completion follow-ups remain pending.

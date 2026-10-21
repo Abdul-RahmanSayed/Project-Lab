@@ -14,6 +14,8 @@ Render or edit the portfolio without the relevant approval.
   Changing it is a release review, not an automatic data refresh.
 - `serve.py`: existing API app factory with deployment environment validation,
   pinned-file checks, a single worker and the existing resource limits.
+- `memory_log.py`: optional, bounded Linux memory counters in ordinary service
+  logs; no request contents, monitoring endpoint or additional dependency.
 - `Dockerfile`: candidate Linux/amd64 build and non-root runtime. The database is
   baked into the image; no request/startup downloads or runtime preparation.
 - `build-tools.lock.txt`: hash-pinned builder wheels; pip/setuptools are removed
@@ -115,12 +117,42 @@ Runtime settings:
 - `FDA_ALLOWED_ORIGINS`: exact canonical HTTPS origins, comma-separated, no path,
   credentials, wildcard or trailing slash. Omit an explicit default `:443` port.
 - `PORT`: 1-65535; defaults to 10000.
+- `FDA_MEMORY_LOG`: `0` by default; `1` enables Linux-only diagnostic logging.
+  Other values are rejected. Enable only for a bounded verification session.
 
 `serve` binds `0.0.0.0` for a container, one worker, connection/task limit 64,
 five SQL jobs, no application pending queue and the unchanged 30-second SQL budget.
 Access logs containing query strings are disabled. Configure the provider's health
 check as `/readyz`, not `/healthz`. The old `backend.run` loopback runner is unchanged.
 No CORS rule is authentication, a firewall or a guarantee against quota exhaustion.
+
+### Optional Memory Evidence
+
+The enabled diagnostic writes JSON lines with `event=fda_memory` at startup,
+after the first 200 FDA API requests and at graceful shutdown (at most 202 lines
+per worker lifetime). Readiness/health requests are excluded. It logs process
+RSS high-water and available cgroup v2 current/peak/limit counters in bytes,
+release ID, PID, uptime and sample count. It never logs query strings, report
+contents or credentials. There are no timers or background network requests.
+
+For a local check of a freshly built image:
+
+```powershell
+.\.venv-api\Scripts\python.exe -B tests/check_container.py --image project-lab-api:local --output-directory generated/deployment/memory-rerun-1 --memory-log
+```
+
+The harness captures the final shutdown log before removing its own container.
+Unavailable/unlimited counters are `null`, not zero. RSS and cgroup memory are
+different measures; cgroup peaks may include startup, descendants and file cache.
+The resolved group's limit does not establish an ancestor/provider limit. A
+graceful final sample is not guaranteed after abrupt termination. See the
+[measured local results and limits](../docs/SLICE_5_MEMORY_LOG_RESULTS.md).
+
+After the reviewed code is pushed and manually deployed to the existing Free
+service, enable `FDA_MEMORY_LOG=1` for bounded hosted verification. Record the
+deployed commit, release and measured counters; unknown values stay unknown.
+Restore `FDA_MEMORY_LOG=0` afterward and verify readiness following the restart.
+This diagnostic needs no Pages rebuild, paid metrics subscription or new service.
 
 ## Frontend Origin and Project Path
 
