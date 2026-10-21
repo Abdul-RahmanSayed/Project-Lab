@@ -1,6 +1,8 @@
 # Project Lab
 
-Local implementation workspace for the FDA Explorer plan. Slices 1 and 2 established local feasibility, a packaged canonical policy core, and reproducible read-only database releases. Slice 3 adds a small modular FastAPI backend serving that checked snapshot, with real local web-request verification. The React/TypeScript/D3 frontend and all deployment work remain unstarted and require separate approval. Hosting must remain $0.
+Local implementation workspace for the FDA Explorer plan. Slices 1 and 2 established local feasibility, a packaged canonical policy core, and reproducible read-only database releases. Slice 3 adds a small modular FastAPI backend. Slice 4 adds the local React/TypeScript/D3 frontend with shared filters, accessible aggregate views, report browsing and truthful snapshot/request states. Deployment and portfolio integration remain unstarted and require separate approval. Hosting must remain $0.
+
+The local Explorer now follows the portfolio's default dark visual style and typography. The portfolio itself remains unchanged; this styling alignment is not deployment or portfolio integration.
 
 ## Documentation
 
@@ -14,6 +16,8 @@ Local implementation workspace for the FDA Explorer plan. Slices 1 and 2 establi
 - [Approved smaller backend scope](docs/SLICE_3_SCOPE.md): October 20 decisions and deliberate simplifications.
 - [Implemented API contract](docs/API_CONTRACT_IMPLEMENTED.md): requests, response models, paging, limits and failure behavior.
 - [Slice 3 results](docs/SLICE_3_RESULTS.md): correctness, actual HTTP timings, resource use, release access and remaining limitations.
+- [Approved Slice 4 scope](docs/SLICE_4_SCOPE.md) and [local frontend results](docs/SLICE_4_RESULTS.md).
+- [Frontend guide](web/README.md): run/build/test commands, release-bound saved data, selection state and request handling.
 - [Historical FastAPI draft](docs/FASTAPI_CONTRACT.md): superseded where the approved smaller scope differs, including unsigned bookmarks and no application waiting queue.
 - [Completion follow-ups](docs/COMPLETION_FOLLOWUPS.md): after all slices are complete and working, remind Abdul about the teaching walkthrough, resume update, and Flex fintech application.
 
@@ -112,8 +116,31 @@ Run after the data preparation and API installation above. Tests require the sep
 
 The benchmark starts and stops its own local server. The constrained run applies approximately 0.1 CPU core and a 512 MiB committed-memory cap to that server only, and temporarily prevents idle sleep. Ten five-client waves produce 50 observations per main scenario. Timing includes dispatch, HTTP handling, query work, validation, encoding and receiving the full body. Busy responses are counted separately, never disguised as fast successful queries. This still excludes browser rendering, internet transfer, service wake-up and actual hosted scheduling. See the [results](docs/SLICE_3_RESULTS.md) before drawing hosting conclusions.
 
+## Run the Local Frontend
+
+Start the checked backend at `127.0.0.1:8765` using the commands above, then run from this workspace with Node 24.13+ (24.x):
+
+```powershell
+npm.cmd --prefix web ci
+npm.cmd --prefix web run build
+npm.cmd --prefix web run preview
+```
+
+Open [FDA Explorer](http://127.0.0.1:4173/). The local preview proxies `/api` requests to the existing backend; no CORS or backend source change is required. For editing with hot reload, use `npm.cmd --prefix web run dev` at `http://127.0.0.1:5173/` instead. If a port is occupied, pass another with `-- --port 4174` or `-- --port 5174`; keep the verified API target separate. The [frontend guide](web/README.md) covers configuration and tests.
+
+The frontend bundles only the checked public metadata, default aggregate response and generated API contract, not the database or raw report pages. That saved default remains labeled, including when the API is unavailable. Custom selections are queried only when the API is ready. Old data keeps its original displayed-selection label while a newer query is pending or fails. Hash URLs preserve the exact committed search, years, release, tab and page size. No general cache, browser persistence, extra queue or plugin framework was added.
+
+After a separately reviewed release change, regenerate the frontend artifacts from that selected checked release before rebuilding:
+
+```powershell
+.\.venv-api\Scripts\python.exe -B data-build\frontend_bundle.py --release-directory $releaseDir --release-id $releaseId
+npm.cmd --prefix web run build
+```
+
+The build checks bundle hashes and default/release identity, generates TypeScript from OpenAPI, then typechecks and builds. It never downloads FDA data, prepares a database or selects a newer release automatically. Local preview wiring is not a deployed API-origin/CORS configuration or hosted wake-up test.
+
 ## Local Files
 
 `data-build/package_core.py` builds the FDA-owned standard-library-only core wheel without writing build artifacts to the FDA checkout. `prepare.py` streams canonically validated pages through the installed core, checks the snapshot pin, and publishes an atomic release. `schema.py` owns versioned tables and annual aggregates. `query.py` reuses each selected set within one overview statement and uses prepared annual totals for year-only selections. `verify.py` compares both the extracted CLI and the independently recovered original CLI against SQL, and rehashes every source page. `verify_runtime.py` additionally checks prepared/SQL dispatch against that independent oracle; `profile_runtime.py` measures the pre-HTTP request path. `backend/app.py` owns startup and shared errors, `backend/jobs.py` owns SQL work limits/cancellation, and `backend/fda/` owns FDA routes, schemas, lifecycle and report projections. `backend/preflight.py`, `backend/test_api.py` and `backend/benchmark.py` provide offline serving checks, contract regressions and actual HTTP evidence.
 
-Slice 2's authorized FDA changes are limited to `part2.py`, the new `fda_core` package, and `pyproject.toml`. Slice 3 adds no FDA-source or portfolio edits. The downloader, saved raw data, source README and ignored upstream tests/review notes remain unchanged. No frontend, deployment, accounts, repository publication, commit or push is included. The upstream stale-test/publication question, reproducible CI/container packaging and current free-provider eligibility remain unresolved; they are not silently treated as accepted work.
+Slice 2's authorized FDA changes are limited to `part2.py`, the new `fda_core` package, and `pyproject.toml`. Slices 3 and 4 add no FDA-source or portfolio edits. The downloader, saved raw data, source README and ignored upstream tests/review notes remain unchanged. Slice 4 includes no deployment, accounts, repository publication, commit or push; Abdul made the preceding local checkpoint commit. The upstream stale-test/publication question, reproducible CI/container packaging and current free-provider eligibility remain unresolved; they are not silently treated as accepted work.

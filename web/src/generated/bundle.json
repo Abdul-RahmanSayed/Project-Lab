@@ -1,0 +1,17 @@
+{
+  "releaseId": "fda-release-sha256:18446003726ef6cb89bbb5cd07a265e8cf9fb3e4585fe5774ed4f6fd18454194",
+  "files": {
+    "saved-overview.json": {
+      "sha256": "9552cab384a4988a5c9ef304bf196e4e052bc9f7c697b2228dbd0dc522d3688b",
+      "bytes": 11928
+    },
+    "metadata.json": {
+      "sha256": "16575b261613c72dda41c0e7fcc24819cb5c21753b7e4b845ce11bb434d2c837",
+      "bytes": 2172
+    },
+    "api-schema.json": {
+      "sha256": "6fa319b6698f4b343f426a32244c42ad1a0f991024da19dbd9a2fa9dd94526d6",
+      "bytes": 42039
+    }
+  }
+}

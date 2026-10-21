@@ -1,0 +1,29 @@
+:root {
+  /* Portfolio dark palette, with stronger control borders and semantic accents. */
+  --page: hsl(240 25% 6%);
+  --surface: hsl(240 20% 8%);
+  --ink: hsl(240 20% 95%);
+  --muted: #9b9bb8;
+  --line: #2d2940;
+  --control-border: #68637f;
+  --hover: hsl(240 20% 12%);
+  --primary: hsl(244 100% 69%);
+  --primary-fill: #655be8;
+  --primary-hover: #5d53df;
+  --link: #b5afff;
+  --teal: hsl(169 100% 42%);
+  --success: #4de4c7;
+  --coral: #ed9b88;
+  --products: hsl(169 100% 42%);
+  --outcomes: #e4bb64;
+  --reactions: #aa9aff;
+  --partial: #e4bb64;
+  --focus: #c5c0ff;
+  --info-bg: #1b1931;
+  --info-ink: #d4d0ff;
+  --warning-bg: #2b2415;
+  --warning-ink: #f0cd86;
+  --error: #ffabb9;
+  --font-sans: 'Inter Variable', 'Segoe UI', Arial, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', Consolas, monospace;
+}

@@ -1,0 +1,2 @@
+# Public frontend artifact hashes must survive checkout on Windows and Unix.
+/web/src/generated/*.json text eol=lf

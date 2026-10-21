@@ -1,0 +1,1676 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Project Lab FDA Explorer",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/healthz": {
+      "get": {
+        "summary": "Health",
+        "operationId": "health_healthz_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/readyz": {
+      "get": {
+        "summary": "Ready",
+        "operationId": "ready_readyz_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/projects": {
+      "get": {
+        "summary": "Projects",
+        "operationId": "projects_api_v1_projects_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/fda/metadata": {
+      "get": {
+        "tags": [
+          "FDA"
+        ],
+        "summary": "Metadata",
+        "operationId": "metadata_api_v1_fda_metadata_get",
+        "parameters": [
+          {
+            "name": "releaseId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^fda-release-sha256:[0-9a-f]{64}$"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Releaseid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MetadataResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "414": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "URI Too Long"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/fda/explore": {
+      "get": {
+        "tags": [
+          "FDA"
+        ],
+        "summary": "Overview",
+        "operationId": "overview_api_v1_fda_explore_get",
+        "parameters": [
+          {
+            "name": "releaseId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^fda-release-sha256:[0-9a-f]{64}$"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Releaseid"
+            }
+          },
+          {
+            "name": "startYear",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^[0-9]{4}$"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Startyear"
+            }
+          },
+          {
+            "name": "endYear",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^[0-9]{4}$"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Endyear"
+            }
+          },
+          {
+            "name": "productFilter",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 256
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Productfilter"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExploreResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "414": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "URI Too Long"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/fda/reports": {
+      "get": {
+        "tags": [
+          "FDA"
+        ],
+        "summary": "Reports",
+        "operationId": "reports_api_v1_fda_reports_get",
+        "parameters": [
+          {
+            "name": "releaseId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^fda-release-sha256:[0-9a-f]{64}$"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Releaseid"
+            }
+          },
+          {
+            "name": "startYear",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^[0-9]{4}$"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Startyear"
+            }
+          },
+          {
+            "name": "endYear",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^[0-9]{4}$"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Endyear"
+            }
+          },
+          {
+            "name": "productFilter",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 256
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Productfilter"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 25,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "const": "reportId:asc",
+              "type": "string",
+              "default": "reportId:asc",
+              "title": "Sort"
+            }
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 2048
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Cursor"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "414": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "URI Too Long"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        }
+      }
+    },
+    "/api/v1/fda/reports/detail": {
+      "get": {
+        "tags": [
+          "FDA"
+        ],
+        "summary": "Report",
+        "operationId": "report_api_v1_fda_reports_detail_get",
+        "parameters": [
+          {
+            "name": "releaseId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^fda-release-sha256:[0-9a-f]{64}$"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Releaseid"
+            }
+          },
+          {
+            "name": "startYear",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^[0-9]{4}$"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Startyear"
+            }
+          },
+          {
+            "name": "endYear",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "^[0-9]{4}$"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Endyear"
+            }
+          },
+          {
+            "name": "productFilter",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 256
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Productfilter"
+            }
+          },
+          {
+            "name": "reportId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 512,
+              "title": "Reportid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DetailResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Bad Request"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "414": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "URI Too Long"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Content"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Internal Server Error"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Service Unavailable"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Detail": {
+        "properties": {
+          "datasetId": {
+            "type": "string",
+            "title": "Datasetid"
+          },
+          "policyVersion": {
+            "type": "string",
+            "title": "Policyversion"
+          },
+          "coverageNotes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Coveragenotes"
+          },
+          "appliedFilters": {
+            "$ref": "#/components/schemas/Filters"
+          },
+          "report": {
+            "$ref": "#/components/schemas/Report"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "datasetId",
+          "policyVersion",
+          "coverageNotes",
+          "appliedFilters",
+          "report"
+        ],
+        "title": "Detail"
+      },
+      "DetailResponse": {
+        "properties": {
+          "label": {
+            "type": "string",
+            "title": "Label"
+          },
+          "isLive": {
+            "type": "boolean",
+            "const": false,
+            "title": "Islive"
+          },
+          "releaseId": {
+            "type": "string",
+            "pattern": "^fda-release-sha256:[0-9a-f]{64}$",
+            "title": "Releaseid"
+          },
+          "snapshotAcquiredAt": {
+            "type": "string",
+            "title": "Snapshotacquiredat"
+          },
+          "source": {
+            "type": "string",
+            "const": "sqlite",
+            "title": "Source"
+          },
+          "detail": {
+            "$ref": "#/components/schemas/Detail"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "label",
+          "isLive",
+          "releaseId",
+          "snapshotAcquiredAt",
+          "source",
+          "detail"
+        ],
+        "title": "DetailResponse"
+      },
+      "ErrorBody": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "title": "Code"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          },
+          "details": {
+            "items": {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Details"
+          },
+          "retryable": {
+            "type": "boolean",
+            "title": "Retryable"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "code",
+          "message",
+          "details",
+          "retryable"
+        ],
+        "title": "ErrorBody"
+      },
+      "ErrorResponse": {
+        "properties": {
+          "error": {
+            "$ref": "#/components/schemas/ErrorBody"
+          },
+          "requestId": {
+            "type": "string",
+            "title": "Requestid"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "error",
+          "requestId"
+        ],
+        "title": "ErrorResponse"
+      },
+      "ExploreResponse": {
+        "properties": {
+          "label": {
+            "type": "string",
+            "title": "Label"
+          },
+          "isLive": {
+            "type": "boolean",
+            "const": false,
+            "title": "Islive"
+          },
+          "releaseId": {
+            "type": "string",
+            "pattern": "^fda-release-sha256:[0-9a-f]{64}$",
+            "title": "Releaseid"
+          },
+          "snapshotAcquiredAt": {
+            "type": "string",
+            "title": "Snapshotacquiredat"
+          },
+          "source": {
+            "type": "string",
+            "enum": [
+              "prepared-default",
+              "sqlite"
+            ],
+            "title": "Source"
+          },
+          "overview": {
+            "$ref": "#/components/schemas/Overview"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "label",
+          "isLive",
+          "releaseId",
+          "snapshotAcquiredAt",
+          "source",
+          "overview"
+        ],
+        "title": "ExploreResponse"
+      },
+      "Filters": {
+        "properties": {
+          "startYear": {
+            "type": "integer",
+            "title": "Startyear"
+          },
+          "endYear": {
+            "type": "integer",
+            "title": "Endyear"
+          },
+          "productFilter": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Productfilter"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "startYear",
+          "endYear",
+          "productFilter"
+        ],
+        "title": "Filters"
+      },
+      "Means": {
+        "properties": {
+          "total": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 125.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total"
+          },
+          "female": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 125.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Female"
+          },
+          "male": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 125.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Male"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "total",
+          "female",
+          "male"
+        ],
+        "title": "Means"
+      },
+      "Metadata": {
+        "properties": {
+          "datasetId": {
+            "type": "string",
+            "title": "Datasetid"
+          },
+          "policyVersion": {
+            "type": "string",
+            "title": "Policyversion"
+          },
+          "coverageNotes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Coveragenotes"
+          },
+          "interpretationNotes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Interpretationnotes"
+          },
+          "coreVersion": {
+            "type": "string",
+            "title": "Coreversion"
+          },
+          "schemaVersion": {
+            "type": "integer",
+            "title": "Schemaversion"
+          },
+          "schemaHash": {
+            "type": "string",
+            "title": "Schemahash"
+          },
+          "queryHash": {
+            "type": "string",
+            "title": "Queryhash"
+          },
+          "sourceRevision": {
+            "type": "string",
+            "title": "Sourcerevision"
+          },
+          "revisionKind": {
+            "type": "string",
+            "title": "Revisionkind"
+          },
+          "reportCount": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Reportcount"
+          },
+          "uniqueReportCount": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Uniquereportcount"
+          },
+          "pageCount": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Pagecount"
+          },
+          "coverageStart": {
+            "type": "string",
+            "format": "date",
+            "title": "Coveragestart"
+          },
+          "coverageEnd": {
+            "type": "string",
+            "format": "date",
+            "title": "Coverageend"
+          },
+          "defaultFilters": {
+            "$ref": "#/components/schemas/Filters"
+          },
+          "supportedFilters": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Supportedfilters"
+          },
+          "supportedSorts": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Supportedsorts"
+          },
+          "limits": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object",
+            "title": "Limits"
+          },
+          "termDisplayOverrides": {
+            "items": {
+              "additionalProperties": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Termdisplayoverrides"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "datasetId",
+          "policyVersion",
+          "coverageNotes",
+          "interpretationNotes",
+          "coreVersion",
+          "schemaVersion",
+          "schemaHash",
+          "queryHash",
+          "sourceRevision",
+          "revisionKind",
+          "reportCount",
+          "uniqueReportCount",
+          "pageCount",
+          "coverageStart",
+          "coverageEnd",
+          "defaultFilters",
+          "supportedFilters",
+          "supportedSorts",
+          "limits",
+          "termDisplayOverrides"
+        ],
+        "title": "Metadata"
+      },
+      "MetadataResponse": {
+        "properties": {
+          "label": {
+            "type": "string",
+            "title": "Label"
+          },
+          "isLive": {
+            "type": "boolean",
+            "const": false,
+            "title": "Islive"
+          },
+          "releaseId": {
+            "type": "string",
+            "pattern": "^fda-release-sha256:[0-9a-f]{64}$",
+            "title": "Releaseid"
+          },
+          "snapshotAcquiredAt": {
+            "type": "string",
+            "title": "Snapshotacquiredat"
+          },
+          "source": {
+            "type": "string",
+            "const": "prepared-metadata",
+            "title": "Source"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/Metadata"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "label",
+          "isLive",
+          "releaseId",
+          "snapshotAcquiredAt",
+          "source",
+          "metadata"
+        ],
+        "title": "MetadataResponse"
+      },
+      "Overview": {
+        "properties": {
+          "datasetId": {
+            "type": "string",
+            "title": "Datasetid"
+          },
+          "policyVersion": {
+            "type": "string",
+            "title": "Policyversion"
+          },
+          "coverageNotes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Coveragenotes"
+          },
+          "appliedFilters": {
+            "$ref": "#/components/schemas/Filters"
+          },
+          "selectedCount": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Selectedcount"
+          },
+          "validAgeCount": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Validagecount"
+          },
+          "missingAgeCount": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Missingagecount"
+          },
+          "ageMeans": {
+            "$ref": "#/components/schemas/Means"
+          },
+          "yearCounts": {
+            "items": {
+              "prefixItems": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "integer",
+                  "minimum": 0.0
+                }
+              ],
+              "type": "array",
+              "maxItems": 2,
+              "minItems": 2
+            },
+            "type": "array",
+            "title": "Yearcounts"
+          },
+          "ageHistogram": {
+            "items": {
+              "prefixItems": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "integer",
+                  "minimum": 0.0
+                }
+              ],
+              "type": "array",
+              "maxItems": 2,
+              "minItems": 2
+            },
+            "type": "array",
+            "title": "Agehistogram"
+          },
+          "genderCounts": {
+            "items": {
+              "prefixItems": [
+                {
+                  "type": "string",
+                  "enum": [
+                    "Female",
+                    "Male",
+                    "Unknown"
+                  ]
+                },
+                {
+                  "type": "integer",
+                  "minimum": 0.0
+                }
+              ],
+              "type": "array",
+              "maxItems": 2,
+              "minItems": 2
+            },
+            "type": "array",
+            "title": "Gendercounts"
+          },
+          "rankings": {
+            "$ref": "#/components/schemas/Rankings"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "datasetId",
+          "policyVersion",
+          "coverageNotes",
+          "appliedFilters",
+          "selectedCount",
+          "validAgeCount",
+          "missingAgeCount",
+          "ageMeans",
+          "yearCounts",
+          "ageHistogram",
+          "genderCounts",
+          "rankings"
+        ],
+        "title": "Overview"
+      },
+      "Page": {
+        "properties": {
+          "datasetId": {
+            "type": "string",
+            "title": "Datasetid"
+          },
+          "policyVersion": {
+            "type": "string",
+            "title": "Policyversion"
+          },
+          "coverageNotes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Coveragenotes"
+          },
+          "appliedFilters": {
+            "$ref": "#/components/schemas/Filters"
+          },
+          "sort": {
+            "type": "string",
+            "const": "reportId:asc",
+            "title": "Sort"
+          },
+          "limit": {
+            "type": "integer",
+            "maximum": 100.0,
+            "minimum": 1.0,
+            "title": "Limit"
+          },
+          "returnedCount": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Returnedcount"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/Summary"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "hasMore": {
+            "type": "boolean",
+            "title": "Hasmore"
+          },
+          "nextCursor": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2048
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Nextcursor"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "datasetId",
+          "policyVersion",
+          "coverageNotes",
+          "appliedFilters",
+          "sort",
+          "limit",
+          "returnedCount",
+          "items",
+          "hasMore",
+          "nextCursor"
+        ],
+        "title": "Page"
+      },
+      "Product": {
+        "properties": {
+          "ordinal": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Ordinal"
+          },
+          "rawName": {
+            "type": "string",
+            "title": "Rawname"
+          },
+          "role": {
+            "type": "string",
+            "title": "Role"
+          },
+          "canonicalTerm": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Canonicalterm"
+          },
+          "displayLabel": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Displaylabel"
+          },
+          "disclosure": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Disclosure"
+          },
+          "matchesProductFilter": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Matchesproductfilter"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "ordinal",
+          "rawName",
+          "role",
+          "canonicalTerm",
+          "displayLabel",
+          "disclosure",
+          "matchesProductFilter"
+        ],
+        "title": "Product"
+      },
+      "Provenance": {
+        "properties": {
+          "sourcePage": {
+            "type": "string",
+            "title": "Sourcepage"
+          },
+          "sourceIndex": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Sourceindex"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "sourcePage",
+          "sourceIndex"
+        ],
+        "title": "Provenance"
+      },
+      "Rankings": {
+        "properties": {
+          "products": {
+            "items": {
+              "prefixItems": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer",
+                  "minimum": 0.0
+                }
+              ],
+              "type": "array",
+              "maxItems": 2,
+              "minItems": 2
+            },
+            "type": "array",
+            "title": "Products"
+          },
+          "outcomes": {
+            "items": {
+              "prefixItems": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer",
+                  "minimum": 0.0
+                }
+              ],
+              "type": "array",
+              "maxItems": 2,
+              "minItems": 2
+            },
+            "type": "array",
+            "title": "Outcomes"
+          },
+          "reactions": {
+            "items": {
+              "prefixItems": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer",
+                  "minimum": 0.0
+                }
+              ],
+              "type": "array",
+              "maxItems": 2,
+              "minItems": 2
+            },
+            "type": "array",
+            "title": "Reactions"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "products",
+          "outcomes",
+          "reactions"
+        ],
+        "title": "Rankings"
+      },
+      "Report": {
+        "properties": {
+          "reportId": {
+            "type": "string",
+            "title": "Reportid"
+          },
+          "eventDate": {
+            "type": "string",
+            "format": "date",
+            "title": "Eventdate"
+          },
+          "year": {
+            "type": "integer",
+            "title": "Year"
+          },
+          "ageYears": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 125.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ageyears"
+          },
+          "gender": {
+            "type": "string",
+            "enum": [
+              "Female",
+              "Male",
+              "Unknown"
+            ],
+            "title": "Gender"
+          },
+          "products": {
+            "items": {
+              "$ref": "#/components/schemas/Product"
+            },
+            "type": "array",
+            "title": "Products"
+          },
+          "suspectProductsCanonical": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Suspectproductscanonical"
+          },
+          "reactionsCanonical": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Reactionscanonical"
+          },
+          "outcomesCanonical": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Outcomescanonical"
+          },
+          "provenance": {
+            "$ref": "#/components/schemas/Provenance"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "reportId",
+          "eventDate",
+          "year",
+          "ageYears",
+          "gender",
+          "products",
+          "suspectProductsCanonical",
+          "reactionsCanonical",
+          "outcomesCanonical",
+          "provenance"
+        ],
+        "title": "Report"
+      },
+      "ReportsResponse": {
+        "properties": {
+          "label": {
+            "type": "string",
+            "title": "Label"
+          },
+          "isLive": {
+            "type": "boolean",
+            "const": false,
+            "title": "Islive"
+          },
+          "releaseId": {
+            "type": "string",
+            "pattern": "^fda-release-sha256:[0-9a-f]{64}$",
+            "title": "Releaseid"
+          },
+          "snapshotAcquiredAt": {
+            "type": "string",
+            "title": "Snapshotacquiredat"
+          },
+          "source": {
+            "type": "string",
+            "const": "sqlite",
+            "title": "Source"
+          },
+          "page": {
+            "$ref": "#/components/schemas/Page"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "label",
+          "isLive",
+          "releaseId",
+          "snapshotAcquiredAt",
+          "source",
+          "page"
+        ],
+        "title": "ReportsResponse"
+      },
+      "Summary": {
+        "properties": {
+          "reportId": {
+            "type": "string",
+            "title": "Reportid"
+          },
+          "eventDate": {
+            "type": "string",
+            "format": "date",
+            "title": "Eventdate"
+          },
+          "year": {
+            "type": "integer",
+            "title": "Year"
+          },
+          "ageYears": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 125.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ageyears"
+          },
+          "gender": {
+            "type": "string",
+            "enum": [
+              "Female",
+              "Male",
+              "Unknown"
+            ],
+            "title": "Gender"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "reportId",
+          "eventDate",
+          "year",
+          "ageYears",
+          "gender"
+        ],
+        "title": "Summary"
+      }
+    }
+  },
+  "x-project-lab-release": "fda-release-sha256:18446003726ef6cb89bbb5cd07a265e8cf9fb3e4585fe5774ed4f6fd18454194"
+}

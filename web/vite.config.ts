@@ -1,0 +1,13 @@
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+
+const target = process.env.FDA_API_TARGET ?? 'http://127.0.0.1:8765';
+const proxy = Object.fromEntries(['/api', '/readyz', '/healthz'].map(path => [path, { target }]));
+
+export default defineConfig({
+  plugins: [react()],
+  base: './',
+  server: { host: '127.0.0.1', port: 5173, strictPort: true, proxy },
+  preview: { host: '127.0.0.1', port: 4173, strictPort: true, proxy },
+  build: { sourcemap: false },
+});

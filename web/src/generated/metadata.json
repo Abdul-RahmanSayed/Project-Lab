@@ -1,0 +1,59 @@
+{
+  "label": "Saved data snapshot",
+  "isLive": false,
+  "releaseId": "fda-release-sha256:18446003726ef6cb89bbb5cd07a265e8cf9fb3e4585fe5774ed4f6fd18454194",
+  "snapshotAcquiredAt": "2026-09-04T18:29:41.824Z",
+  "source": "prepared-metadata",
+  "metadata": {
+    "datasetId": "fda-sha256:2f7ab38cb063859ecc2ace39d7eda363cfd2e72996890a30dd5c71582a9b3f07",
+    "policyVersion": "fda-core-sha256:a89dcc5c5961f7d7e5b8af99ea9a9ecc8dee4b4abd12e70feae25d66e604a282",
+    "coverageNotes": [
+      "2026 covers January 1 only, stored in the final 2025 download window.",
+      "Report counts use actual event years; download-window splits do not redefine years.",
+      "Adverse-event reports do not establish causation, incidence, or product safety."
+    ],
+    "interpretationNotes": [
+      "Counts describe FDA adverse-event reports, not unique people, causation, incidence, relative risk, or product-safety conclusions."
+    ],
+    "coreVersion": "0.1.0",
+    "schemaVersion": 2,
+    "schemaHash": "8041ae142dc15cf658a7a8c4bcd24594a7577e70ad8b2223a87a697bed5cd17b",
+    "queryHash": "9a3ebef2057eceb62a1dc46c6af78618a24d3c486985e22fced490573553c6ad",
+    "sourceRevision": "6496e08754e428c87900c272ba61bcae86f2b9f5",
+    "revisionKind": "local-working-tree",
+    "reportCount": 97652,
+    "uniqueReportCount": 97652,
+    "pageCount": 987,
+    "coverageStart": "2002-01-01",
+    "coverageEnd": "2026-01-01",
+    "defaultFilters": {
+      "startYear": 2002,
+      "endYear": 2026,
+      "productFilter": null
+    },
+    "supportedFilters": [
+      "startYear",
+      "endYear",
+      "productFilter"
+    ],
+    "supportedSorts": [
+      "reportId:asc"
+    ],
+    "limits": {
+      "productCharacters": 256,
+      "productUtf8Bytes": 1024,
+      "cursorCharacters": 2048,
+      "reportIdUtf8Bytes": 512,
+      "defaultPage": 25,
+      "maximumPage": 100,
+      "responseBytes": 1048576
+    },
+    "termDisplayOverrides": [
+      {
+        "canonical": "EXEMPTION 4",
+        "displayLabel": "Undisclosed product names (EXEMPTION 4; may include multiple products)",
+        "disclosure": "Undisclosed product names (EXEMPTION 4; may include multiple products)"
+      }
+    ]
+  }
+}
