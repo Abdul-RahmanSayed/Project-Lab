@@ -2,11 +2,29 @@
 
 import ctypes
 from ctypes import wintypes
+from contextlib import contextmanager
 import os
 import time
 
 
 _handles = []
+
+
+@contextmanager
+def prevent_idle_sleep():
+    if os.name != "nt":
+        raise RuntimeError("Idle-sleep prevention uses a Windows execution-state request.")
+    kernel = ctypes.WinDLL("kernel32", use_last_error=True)
+    kernel.SetThreadExecutionState.argtypes = [wintypes.DWORD]
+    kernel.SetThreadExecutionState.restype = wintypes.DWORD
+    previous = kernel.SetThreadExecutionState(0x80000000 | 0x00000001 | 0x00000002)
+    if not previous:
+        raise RuntimeError("Could not request benchmark-only idle-sleep prevention.")
+    try:
+        yield
+    finally:
+        if not kernel.SetThreadExecutionState(previous):
+            raise RuntimeError("Could not restore the benchmark thread's execution state.")
 
 
 def constrain(cpu_cores=.1, memory_mib=512):

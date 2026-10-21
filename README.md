@@ -1,6 +1,6 @@
 # Project Lab
 
-Local implementation workspace for the FDA Explorer plan. Slices 1 and 2 are complete: local feasibility, a packaged canonical policy core, and reproducible read-only database releases. Intended later architecture: React/TypeScript/D3, a modular FastAPI backend, and a prepared SQLite snapshot with $0 hosting and a labeled saved overview during service wake-up. The API and frontend have not started.
+Local implementation workspace for the FDA Explorer plan. Slices 1 and 2 established local feasibility, a packaged canonical policy core, and reproducible read-only database releases. Slice 3 adds a small modular FastAPI backend serving that checked snapshot, with real local web-request verification. The React/TypeScript/D3 frontend and all deployment work remain unstarted and require separate approval. Hosting must remain $0.
 
 ## Documentation
 
@@ -9,6 +9,13 @@ Local implementation workspace for the FDA Explorer plan. Slices 1 and 2 are com
 - [Slice 1 measured results](docs/SLICE_1_RESULTS.md).
 - [Slice 2 measured results and remaining performance gate](docs/SLICE_2_RESULTS.md).
 - [Later decisions and current performance expectations](docs/FDA_EXPLORER_DECISIONS.md): the user-approved default-overview threshold supersedes the plan's provisional two-second target.
+- [Prepared-default performance follow-up](docs/PERFORMANCE_FOLLOWUP_RESULTS.md): the local default path passes; standby-affected runs and filtered costs are retained and qualified.
+- [October 15 results review](docs/RESULTS_REVIEW_2026-10-15.md): historical review and then-blocked release access; access was restored during Slice 3.
+- [Approved smaller backend scope](docs/SLICE_3_SCOPE.md): October 20 decisions and deliberate simplifications.
+- [Implemented API contract](docs/API_CONTRACT_IMPLEMENTED.md): requests, response models, paging, limits and failure behavior.
+- [Slice 3 results](docs/SLICE_3_RESULTS.md): correctness, actual HTTP timings, resource use, release access and remaining limitations.
+- [Historical FastAPI draft](docs/FASTAPI_CONTRACT.md): superseded where the approved smaller scope differs, including unsigned bookmarks and no application waiting queue.
+- [Completion follow-ups](docs/COMPLETION_FOLLOWUPS.md): after all slices are complete and working, remind Abdul about the teaching walkthrough, resume update, and Flex fintech application.
 
 ## Reproduce Locally
 
@@ -28,7 +35,7 @@ $releaseDir = $buildRecord.releaseDirectory
 .\.venv\Scripts\python.exe -B data-build\verify.py --source-repo $fdaSource --database "$releaseDir\fda.sqlite3" --output-dir generated\rerun\verification --iterations 30
 ```
 
-Preparation stages and validates a whole bundle, then publishes it under a content-derived release directory. A byte-identical existing release can be reused; differing content cannot replace it. Use a separate output root for an independent rebuild. The release contains the database, metadata, page inventory, labeled saved overview, and artifact checksums. Timings stay outside the deterministic release. All databases, wheels, generated evidence, and the environment are excluded by `.gitignore`; no Git repository has been initialized here.
+Preparation stages and validates a whole bundle, then publishes it under a content-derived release directory. A byte-identical existing release can be reused; differing content cannot replace it. Use a separate output root for an independent rebuild. The release contains the database, metadata, page inventory, labeled saved overview, and artifact checksums. Timings stay outside the deterministic release. All databases, wheels, generated evidence, and the environment are excluded by `.gitignore`. The user has since initialized Project Lab on `development`; this performance follow-up does not commit or push changes.
 
 The source lock deliberately identifies local working-tree content, not just the base commit. Source/core/schema/query changes require a reviewed new pin and full rebuild; changing the source lock is not an automatic refresh. Rebuilding the pinned wheel does not depend on Slice 1's generated evidence. Its SHA-256 must match the wheel pin. The original plan and Slice 1 reports remain historical; their old database commands do not apply to schema version 2.
 
@@ -45,16 +52,68 @@ The filtered query returns 149 reports, 123 valid ages, and 26 missing/invalid a
 
 ## Profile Under Constraints
 
-On Windows, this applies a Job Object hard CPU cap of approximately 0.1 core and a 512 MiB committed-memory cap to its own process only. It measures sequential queries, then five independent SQLite connections, without a result cache:
+The historical SQL-only benchmark applies a Windows Job Object hard CPU cap of approximately 0.1 core and a 512 MiB committed-memory cap to its own process only. It measures sequential queries, then five independent SQLite connections, without a result cache:
 
 ```powershell
 .\.venv\Scripts\python.exe -B data-build\profile.py --database "$releaseDir\fda.sqlite3" --output generated\rerun\profile-constrained.json --constrained --iterations 5 --clients 5
 ```
 
-The original two-second target is historical, not a current requirement. The user now requires **warm request latency p95 strictly below ten seconds for the default all-year overview with five simultaneous requesters**, within the actual free compute/memory/storage limits. The existing default-overview p95 of 13.05 seconds does not meet that goal. Maximum latency remains a diagnostic metric, not the acceptance threshold. See the [decision record](docs/FDA_EXPLORER_DECISIONS.md). Preparation belongs offline, not in the constrained service process. No further implementation slice is authorized by this documentation update.
+The original two-second target is historical, not a current requirement. The user now requires **warm request latency p95 strictly below ten seconds for the default all-year overview with five simultaneous requesters**, within the actual free compute/memory/storage limits. The historical SQL-only default p95 was 13.05 seconds. Maximum latency remains a diagnostic metric, not the acceptance threshold. See the [decision record](docs/FDA_EXPLORER_DECISIONS.md). Preparation belongs offline, not in the constrained service process.
+
+## Prepared Default Reuse
+
+`data-build/runtime.py` validates the existing release once, verifies the query-code pin, and keeps one immutable, labeled default response. Only the exact all-year/no-product selection uses those prepared bytes. Changed filters still use the existing read-only SQL path and keep the raw search, counting, normalization, and age policies. Every response explicitly describes a saved data snapshot, not live FDA data. This runtime adapter has no filtered-response cache; the later HTTP backend adds the five-job work limit described below.
+
+The historical controlled short run measured default p95 **2.08 ms**, mixed uncached SQL p95 **8.91 seconds**, and constrained process peak **76.63 MiB**, before HTTP handling existed. Two longer runs overlapped Modern Standby and are retained as qualified evidence. Do not compare these directly with the [Slice 3 HTTP results](docs/SLICE_3_RESULTS.md) as a controlled speedup experiment.
+
+After creating `$releaseDir` above, run the new tests and independent verification, then profile:
+
+```powershell
+.\.venv\Scripts\python.exe -B tests\test_overview_runtime.py --source-repo $fdaSource -v
+.\.venv\Scripts\python.exe -B tests\test_windows_limits.py -v
+.\.venv\Scripts\python.exe -B data-build\verify_runtime.py --source-repo $fdaSource --release-directory $releaseDir --output-dir generated\rerun\runtime-verification
+.\.venv\Scripts\python.exe -B data-build\profile_runtime.py --release-directory $releaseDir --output generated\rerun\runtime-profile-constrained.json --rounds 20 --clients 5 --constrained --keep-awake
+```
+
+This profiler measures repeated defaults, repeated uncached carrots, mixed uncached SQL selections, and defaults interleaved with filtered work. Timing starts before task submission and includes dispatch/synchronization/scheduling wait. SQL connections are opened and closed per request; prepared defaults open none. Twenty rounds produce 100 measured requests per scenario in five-request waves, not an unbounded arrival queue. `--keep-awake` temporarily requests both system and display activity (needed for this machine's Modern Standby) and restores the previous thread state on exit; it does not change saved power settings or prevent deliberate user sleep. Use `--rounds 5` for a shorter 25-request diagnostic per scenario. This is the pre-HTTP runtime experiment; use the backend benchmark below to include actual local web requests.
+
+## Run the Local Backend
+
+Use a separate lightweight API environment. This installs the existing serving modules with the backend, so it runs without importing through a machine-specific source path. It does not install pandas, NumPy, Matplotlib or the FDA analysis core into the API environment.
+
+```powershell
+python -m venv .venv-api
+.\.venv-api\Scripts\python.exe -m pip install setuptools==80.9.0 -r backend\requirements.lock.txt
+.\.venv-api\Scripts\python.exe -m pip install --no-deps --no-build-isolation .
+$buildRecord = Get-Content -Raw generated\backend\release\preparation.json | ConvertFrom-Json
+$releaseDir = $buildRecord.releaseDirectory
+$releaseId = $buildRecord.release.releaseId
+.\.venv-api\Scripts\python.exe -B -m backend.preflight --release-directory $releaseDir --release-id $releaseId --output generated\backend\preflight.json
+.\.venv-api\Scripts\python.exe -B -m backend.run --release-directory $releaseDir --release-id $releaseId --port 8765
+```
+
+If preparing into a different output root, read that root's `preparation.json` instead. The current rebuilt copy is under `generated/backend/release`; the original `generated/slice2/final-release-a` copy is also readable after Abdul's targeted Windows permission repair. Both have the same checked release identity and database bytes. New Windows preparation directories may still require an explicit permission/inheritance check; the pinned builder was not silently repinned to alter publication permissions.
+
+Open [interactive API docs](http://127.0.0.1:8765/docs), [readiness](http://127.0.0.1:8765/readyz), or [the 2024-2026 CARROTS overview](http://127.0.0.1:8765/api/v1/fda/explore?startYear=2024&endYear=2026&productFilter=CARROTS). This is a local JSON API, not the dashboard frontend. Stop a terminal-run server with Ctrl+C. The runner binds only to `127.0.0.1` and starts one worker.
+
+The default response reuses one checked prepared payload. Changed selections query SQLite; there is no general result cache. Up to five SQL jobs run at once, with **no application waiting queue**; excess SQL requests receive `503 SERVICE_BUSY` and `Retry-After: 2`. The 30-second SQL-backed budget includes dispatch, query, validation and encoding. Disconnects/timeouts signal cancellation, and a worker keeps its slot until it actually exits. The server also has a finite built-in connection/task limit; that is not a traffic-flood defense.
+
+## Verify the Backend
+
+Run after the data preparation and API installation above. Tests require the separate test dependency pins. The independent HTTP oracle uses the analysis environment and the original Python analysis, not the API's SQL answers.
+
+```powershell
+.\.venv-api\Scripts\python.exe -m pip install -r backend\requirements-test.lock.txt
+.\.venv-api\Scripts\python.exe -B -m backend.test_api --release-directory $releaseDir --release-id $releaseId --output generated\backend\api-tests.json
+.\.venv\Scripts\python.exe -B data-build\api_oracle.py --source-repo $fdaSource --output generated\backend\api-oracle.json
+.\.venv-api\Scripts\python.exe -B -m backend.benchmark --release-directory $releaseDir --release-id $releaseId --oracle generated\backend\api-oracle.json --output-directory generated\backend\http-acceptance --rounds 1 --port 8876
+.\.venv-api\Scripts\python.exe -B -m backend.benchmark --release-directory $releaseDir --release-id $releaseId --output-directory generated\backend\http-constrained-final --rounds 10 --constrained --port 8876
+```
+
+The benchmark starts and stops its own local server. The constrained run applies approximately 0.1 CPU core and a 512 MiB committed-memory cap to that server only, and temporarily prevents idle sleep. Ten five-client waves produce 50 observations per main scenario. Timing includes dispatch, HTTP handling, query work, validation, encoding and receiving the full body. Busy responses are counted separately, never disguised as fast successful queries. This still excludes browser rendering, internet transfer, service wake-up and actual hosted scheduling. See the [results](docs/SLICE_3_RESULTS.md) before drawing hosting conclusions.
 
 ## Local Files
 
-`data-build/package_core.py` builds the FDA-owned standard-library-only core wheel without writing build artifacts to the FDA checkout. `prepare.py` streams canonically validated pages through the installed core, checks the snapshot pin, and publishes an atomic release. `schema.py` owns versioned tables and annual aggregates. `query.py` reuses each selected set within one overview statement and uses prepared annual totals for year-only selections. `verify.py` compares both the extracted CLI and the independently recovered original CLI against SQL, and rehashes every source page. The two local test suites cover policy/CLI compatibility, failure handling, release integrity, and read-only queries.
+`data-build/package_core.py` builds the FDA-owned standard-library-only core wheel without writing build artifacts to the FDA checkout. `prepare.py` streams canonically validated pages through the installed core, checks the snapshot pin, and publishes an atomic release. `schema.py` owns versioned tables and annual aggregates. `query.py` reuses each selected set within one overview statement and uses prepared annual totals for year-only selections. `verify.py` compares both the extracted CLI and the independently recovered original CLI against SQL, and rehashes every source page. `verify_runtime.py` additionally checks prepared/SQL dispatch against that independent oracle; `profile_runtime.py` measures the pre-HTTP request path. `backend/app.py` owns startup and shared errors, `backend/jobs.py` owns SQL work limits/cancellation, and `backend/fda/` owns FDA routes, schemas, lifecycle and report projections. `backend/preflight.py`, `backend/test_api.py` and `backend/benchmark.py` provide offline serving checks, contract regressions and actual HTTP evidence.
 
-Slice 2's authorized FDA changes are limited to `part2.py`, the new `fda_core` package, and `pyproject.toml`. The downloader, saved raw data, source README, ignored upstream tests/review notes, and portfolio remain unchanged. No frontend, FastAPI service, deployment, accounts, repository publication, commit, or push is included.
+Slice 2's authorized FDA changes are limited to `part2.py`, the new `fda_core` package, and `pyproject.toml`. Slice 3 adds no FDA-source or portfolio edits. The downloader, saved raw data, source README and ignored upstream tests/review notes remain unchanged. No frontend, deployment, accounts, repository publication, commit or push is included. The upstream stale-test/publication question, reproducible CI/container packaging and current free-provider eligibility remain unresolved; they are not silently treated as accepted work.

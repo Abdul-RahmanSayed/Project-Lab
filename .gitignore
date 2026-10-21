@@ -1,5 +1,8 @@
 # Local environments and all generated snapshot/benchmark artifacts.
 /.venv/
+/.venv-api/
+/build/
+*.egg-info/
 /generated/
 __pycache__/
 *.py[cod]

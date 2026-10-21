@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools==80.9.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "project-lab-api"
+version = "0.1.0"
+description = "Local read-only FDA Explorer backend"
+requires-python = ">=3.14,<3.15"
+dependencies = ["fastapi==0.154.0", "uvicorn==0.54.0"]
+
+[tool.setuptools]
+packages = ["backend", "backend.fda"]
+py-modules = ["common", "schema", "query", "prepare", "runtime", "windows_limits"]
+package-dir = {"" = "data-build", "backend" = "backend"}
