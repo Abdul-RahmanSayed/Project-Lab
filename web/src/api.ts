@@ -2,15 +2,16 @@ import { checked, bundledMetadata } from './contracts';
 import { binaryCompare, sameFilters } from './selection';
 import { RequestError } from './types';
 import type { Filters, MetadataResponse } from './types';
+import { apiOrigin } from './apiOrigin';
 
-const prefix = '/api/v1/fda/';
+const prefix = apiOrigin(import.meta.env.VITE_FDA_API_ORIGIN) + '/api/v1/fda/';
 const maximumBytes = 1024 * 1024;
 
 async function jsonRequest(path: string, signal: AbortSignal, milliseconds = 35000): Promise<unknown> {
   const deadline = AbortSignal.timeout(milliseconds);
   try {
     const response = await fetch(prefix + path, {
-      signal: AbortSignal.any([signal, deadline]), cache: 'no-store', headers: { Accept: 'application/json' },
+      signal: AbortSignal.any([signal, deadline]), cache: 'no-store', credentials: 'omit', headers: { Accept: 'application/json' },
     });
     const reader = response.body?.getReader();
     const chunks: Uint8Array[] = [];

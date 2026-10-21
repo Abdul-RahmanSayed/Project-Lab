@@ -61,3 +61,81 @@ The [local frontend results](SLICE_4_RESULTS.md) separate actual browser/API ver
 Abdul requested that the local UI match his existing portfolio, while reiterating that $0 deployment/portfolio integration needs a separately authorized slice. Read-only inspection identified the production React app under `artifacts/portfolio`, not the legacy root app. Its default dark background, violet/mint accents and Inter/JetBrains Mono families now inform the Explorer's tokens, controls, tables and report dialog. The compact dashboard layout, semantic chart/alert distinctions and all data/selection/request behavior remain unchanged. Two pinned font packages supply self-hosted faces; no runtime font CDN or new theme framework was added.
 
 The follow-up passed build/typecheck, 17 unit tests and 22 browser tests, including a new local-font/contrast check and desktop/mobile screenshots. It is a local styling update, not Slice 5 acceptance. No provider/account terms were rechecked, no provisioning/publication/deployment occurred, and the FDA source and portfolio were not edited. The next deployment review must still establish current $0 eligibility/resource limits and test actual origins, release compatibility, fallback, wake-up and rollback before claiming completion.
+
+## October 20, 2026: Slice 5 Hosting Review Authorized
+
+Abdul authorized starting the next slice with provider/account/resource review and a concrete proposal **before** provisioning, publication or portfolio changes. He confirmed that he has no Render account and is willing to make Project Lab public if that simplifies deployment. No account was created and no repository visibility was changed. The configured GitHub remote returned 404 through public and connected metadata reads; accessibility/visibility is unresolved, not assumed private or public.
+
+The [Slice 5A proposal](SLICE_5_DEPLOYMENT_PROPOSAL.md) recommends GitHub Pages, one Render Free API built from a reviewed Dockerfile/commit, and the existing checked database as a checksum-pinned GitHub Release attachment outside Git history. Current official documentation was reviewed, including separate workspace/compute costs, free CPU/RAM, idle wake-up, bandwidth/build allowances, suspension and rollback limits. Render account-specific verification remains untested; stop if a payment method or paid plan is required. Alternative Docker Spaces/Koyeb signup terms did not meet the proposed new-account $0 path.
+
+This phase added documentation only. It rechecked database bytes/size, inspected existing origin/binding/retry wiring and recorded planned Linux/hosted checks; it did not rerun parity/performance/browser suites or establish hosted acceptance. The deployment proposal, artifact publication and portfolio integration need their relevant approvals before execution. No new filters, caching framework, job queue, snapshot/policy repin, FDA-source edit, provision, deployment, account, commit or push occurred. Completion follow-ups remain pending.
+
+## October 20-21, 2026: Local Deployment Preparation Approved
+
+Abdul explicitly approved packaging the checked release, adding container/API-origin
+wiring and testing locally, while excluding accounts, resources, publication,
+repository visibility changes, portfolio edits, commits and pushes.
+
+[Slice 5B](SLICE_5_LOCAL_PREPARATION_RESULTS.md) records the checksum-pinned archive,
+candidate Docker context/runtime, deployment app entry point, trusted HTTPS frontend
+origin and local tests. Final checks passed: 12 preparation/configuration, 12 API,
+20 frontend unit, 22 existing browser and four separate-origin HTTPS cases. The
+HTTPS API ran an isolated installed wheel, and real stop/restart tests recovered
+through manual Retry without changing data/filter labels. All test helpers stopped.
+SQL admission/deadlines and raw search/normalization/age/counting policies are unchanged.
+
+Docker/Podman and an installed WSL runtime were unavailable. No Linux image was
+built or accepted; compatible wheel downloads and an actual base digest are not
+execution/security proof. Linux parity/resources and real hosted eligibility,
+origins/certificates, idle wake, quotas and rollback still require verification.
+No new latency/peak-memory claim, external action or completion reminder follows
+from this local preparation result.
+
+## October 21, 2026: Accounts and Local Linux Follow-Up
+
+Abdul provided the GitHub URL, and connected repository metadata now confirms
+Project-Lab is public with default branch `development`. He reports creating a Hobby
+Render account, removing its initially attached card, and installing Docker Desktop
+and WSL2 himself. This is not authorization for service creation, publication,
+portfolio changes, commits or pushes; account-specific billing/resources have not
+been independently inspected.
+
+The [Linux follow-up](SLICE_5_LINUX_RESULTS.md) built the unchanged candidate image
+and tested the existing release with 0.1 CPU/512,000,000-byte limits, no swap and
+read-only/non-root execution. Eleven Python-reference overview fixtures and bounded
+report/detail checks passed. Default HTTP p95 was 26.62 ms for 50/50 successful
+requests; process high-water resident memory was 105.88 MiB and container-accounted
+peak 206.20 MiB including cache/inspection work. Repeated/mixed uncached batches,
+overload and same-image restart were measured without adding caching/queues or
+changing search, normalization, ages or counting. Small filtered samples establish
+no new universal latency target.
+
+This removes the missing-local-Linux-runtime blocker, not the public-runtime
+security/currentness review or hosted acceptance. The retained Python/Bookworm base
+was not silently upgraded. Source/history review, actual no-card/Free eligibility,
+publication/provision approvals, real origin/version/fallback/wake/rollback and the
+separately approved portfolio edit remain ahead. Completion reminders stay pending.
+
+## October 21, 2026: Local Runtime Refresh Authorized
+
+After the publication/runtime review, Abdul authorized only a small local runtime
+and build-tool refresh, preserving the exact database and policy/query pins and
+repeating correctness/resource checks. Both Docker stages now pin the inspected
+Python 3.14.8/Bookworm amd64 digest; builder pip 26.2.2 and setuptools 84.2.1 wheels
+are hash-pinned. Neither is importable from the venv or base interpreter in the final
+serving filesystem. No framework upgrade, distribution migration, new snapshot,
+data repack/rebuild or API/query/policy implementation change was introduced.
+
+The [refresh results](SLICE_5_RUNTIME_REFRESH_RESULTS.md) record 12 existing API
+regressions on Linux/Python 3.14.8, 11 HTTP parity fixtures and repeated/mixed
+uncached resource measurements. All 12 invariant file hashes stayed fixed;
+25 installed application source files matched the workspace. Default p95 was
+76.84 ms for 50/50 requests under 0.1 CPU/512,000,000-byte limits; server resident
+high-water memory was 100.87 MiB and container-accounted peak 108.13 MiB. These are
+local observations, not a controlled speed/memory improvement over the older run.
+
+The review's maintenance items are addressed locally, but complete native/OS
+advisory coverage and hosted acceptance remain unestablished. No deployment,
+publication, service/account creation, portfolio edit, commit or push is authorized
+by this refresh. $0/account checks and explicit approval still precede public steps;
+actual origin/version/fallback/wake/rollback and completion reminders remain pending.

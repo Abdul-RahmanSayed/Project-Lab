@@ -10,12 +10,13 @@ describe('request context, bounded responses and raw search transport', () => {
     const filters = { ...bundledMetadata.metadata.defaultFilters, productFilter: ' + CARROTS %_ ' };
     const payload = structuredClone(savedOverview);
     payload.overview.appliedFilters = filters;
-    const fetcher = vi.fn(async (_url: string) => Response.json(payload));
+    const fetcher = vi.fn(async (_url: string, _options?: RequestInit) => Response.json(payload));
     vi.stubGlobal('fetch', fetcher);
     await getOverview(filters, bundledMetadata, signal());
     const address = new URL(String(fetcher.mock.calls[0][0]), 'http://localhost');
     expect(address.searchParams.get('productFilter')).toBe(filters.productFilter);
     expect(address.searchParams.get('releaseId')).toBe(bundledMetadata.releaseId);
+    expect(fetcher.mock.calls[0][1]).toMatchObject({ credentials: 'omit', cache: 'no-store' });
   });
   it('never accepts the prepared default as a different selection', async () => {
     vi.stubGlobal('fetch', vi.fn(async () => Response.json(savedOverview)));

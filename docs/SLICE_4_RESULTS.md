@@ -90,6 +90,16 @@ Local browser/API verification is not deployed end-to-end completion. No provide
 
 Browser testing used Chrome with responsive/touch emulation, not physical phones, native on-screen keyboards, Safari/Firefox, or a real screen reader. Semantics/keyboard/touch paths were checked; this is not WCAG certification. Browser resource measurements are diagnostic, not a capacity guarantee. Reproducibility remains local-runtime/working-tree evidence, not CI/container/supply-chain verification. The upstream stale-test/publication issue and pinned Windows builder's publication-permission issue remain as documented in Slice 3.
 
-**Stop for Slice 4 review.** The next separately authorized slice is the $0 deployment/portfolio integration review and implementation: verify current provider/account terms and resource limits before provisioning, then test real origin/version compatibility, fallback, wake-up and rollback. Do not provision, publish or change the portfolio based on this local result alone. Additional filters/parallel coordinates or another project are not silently added to the MVP.
+### Handoff to Slice 5
+
+The local Slice 4 results have now been discussed with Abdul. That discussion does not itself authorize deployment or establish hosted acceptance.
+
+The subsequent published-provider review and deployment proposal are recorded in [Slice 5A](SLICE_5_DEPLOYMENT_PROPOSAL.md). The list below describes what Slice 4 completed and left for that next slice; it is not a claim that the later review remains unstarted.
+
+- **Completed:** local React/TypeScript/D3 frontend, browser/API verification, and visual alignment with the portfolio. Matching its styling did not publish the Explorer or integrate it into the actual portfolio website.
+- **Not performed in Slice 4:** current $0 provider/account eligibility and resource-limit review, provisioning, public deployment, actual portfolio integration, or hosted origin/version/fallback/wake-up/rollback tests.
+- **Next technical work, subject to separate authorization:** review current $0 hosting options and account requirements, then present a concrete deployment/integration proposal before provisioning, publishing or editing the portfolio. After the relevant approval, implement and test the hosted setup, including release compatibility, honest saved fallback, service wake-up and rollback.
+
+Do not repeat the completed local frontend or styling work as a new slice, and do not count it as deployment evidence. Additional filters/parallel coordinates or another project are not silently added to the MVP.
 
 FDA adverse-event reports are not unique people, causation, incidence, relative risk or product-safety conclusions. Completion/teaching/resume/Flex follow-ups remain pending until the agreed feature is genuinely complete and verified end to end.

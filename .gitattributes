@@ -1,2 +1,7 @@
 # Public frontend artifact hashes must survive checkout on Windows and Unix.
 /web/src/generated/*.json text eol=lf
+/deployment/*.py text eol=lf
+/deployment/Dockerfile text eol=lf
+/deployment/build-tools.lock.txt text eol=lf
+/deployment/release.lock.json text eol=lf
+/.dockerignore text eol=lf

@@ -47,4 +47,21 @@ The saved default is eligible only for its exact year/product selection and rele
 
 The API's five SQL jobs/no pending queue and 30-second budget remain unchanged. Frontend request cancellation does not promise instant termination of every proxy/filesystem/native operation. Local Vite proxy behavior is not production hosting, cross-origin/CORS, sleeping-service recovery or an actual provider quota test.
 
+## Local Deployment Preparation
+
+After the separate Slice 5B approval, `VITE_FDA_API_ORIGIN` selects a trusted plain
+HTTPS API origin at build time; it is not a secret or visitor-controlled setting.
+With no origin, the normal build keeps its existing local proxy behavior.
+`npm.cmd run build:deployment` requires that origin and writes separately under
+`generated/deployment/site/Project-Lab`, retaining relative assets and hash routes.
+Requests explicitly omit credentials; response/filter/release checks are unchanged.
+
+`npm.cmd run test:deployment` uses the prepared local wheel/release and short-lived
+self-signed certificate described in the [deployment guide](../deployment/README.md).
+It owns separate loopback HTTPS servers and tests actual cross-origin requests,
+process outages and Retry recovery. Its dedicated config alone bypasses the local
+test certificate's trust check; that is not suitable for public hosted verification.
+See [Slice 5B results](../docs/SLICE_5_LOCAL_PREPARATION_RESULTS.md). No deployment or
+portfolio integration is claimed by these checks.
+
 FDA report mentions are not unique people, causation, incidence, relative risk or product-safety conclusions. No full raw report JSON, original age/unit strings or raw reaction strings are invented for details.

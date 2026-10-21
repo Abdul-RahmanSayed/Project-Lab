@@ -19,3 +19,4 @@ __pycache__/
 /web/dist/
 /web/.env.local
 /web/.env.*.local
+/deployment/input/*.tar.gz

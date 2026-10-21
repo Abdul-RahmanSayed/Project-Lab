@@ -1,6 +1,6 @@
 # Project Lab
 
-Local implementation workspace for the FDA Explorer plan. Slices 1 and 2 established local feasibility, a packaged canonical policy core, and reproducible read-only database releases. Slice 3 adds a small modular FastAPI backend. Slice 4 adds the local React/TypeScript/D3 frontend with shared filters, accessible aggregate views, report browsing and truthful snapshot/request states. Deployment and portfolio integration remain unstarted and require separate approval. Hosting must remain $0.
+Local implementation workspace for the FDA Explorer plan. Slices 1 and 2 established local feasibility, a packaged canonical policy core, and reproducible read-only database releases. Slice 3 adds a small modular FastAPI backend. Slice 4 adds the local React/TypeScript/D3 frontend with shared filters, accessible aggregate views, report browsing and truthful snapshot/request states. Slice 5A records the hosting review; Slice 5B adds locally tested deployment preparation and a passing constrained Linux/HTTP follow-up. Public-runtime security review and hosted acceptance remain pending; public deployment and portfolio integration remain unimplemented and require the relevant approval. Hosting must remain $0.
 
 The local Explorer now follows the portfolio's default dark visual style and typography. The portfolio itself remains unchanged; this styling alignment is not deployment or portfolio integration.
 
@@ -17,6 +17,10 @@ The local Explorer now follows the portfolio's default dark visual style and typ
 - [Implemented API contract](docs/API_CONTRACT_IMPLEMENTED.md): requests, response models, paging, limits and failure behavior.
 - [Slice 3 results](docs/SLICE_3_RESULTS.md): correctness, actual HTTP timings, resource use, release access and remaining limitations.
 - [Approved Slice 4 scope](docs/SLICE_4_SCOPE.md) and [local frontend results](docs/SLICE_4_RESULTS.md).
+- [Slice 5A hosting review and deployment proposal](docs/SLICE_5_DEPLOYMENT_PROPOSAL.md): published limits, account checks and proposed setup; local preparation was subsequently approved, while external actions/hosted acceptance remain pending.
+- [Slice 5B local preparation results](docs/SLICE_5_LOCAL_PREPARATION_RESULTS.md) and [deployment guide](deployment/README.md): archive/container/origin wiring and local HTTPS evidence, with Linux/hosted limits explicit.
+- [October 21 Linux follow-up](docs/SLICE_5_LINUX_RESULTS.md): checked container build, representative Python-reference parity, five-client HTTP measurements and memory within 0.1 CPU/512 MB; hosted/security checks remain pending.
+- [Local runtime refresh](docs/SLICE_5_RUNTIME_REFRESH_RESULTS.md): Python/base and hash-pinned build-tool maintenance, packaging-tool removal, Linux API regressions and repeated constrained HTTP/resource checks; no deployment or full-image security clearance.
 - [Frontend guide](web/README.md): run/build/test commands, release-bound saved data, selection state and request handling.
 - [Historical FastAPI draft](docs/FASTAPI_CONTRACT.md): superseded where the approved smaller scope differs, including unsigned bookmarks and no application waiting queue.
 - [Completion follow-ups](docs/COMPLETION_FOLLOWUPS.md): after all slices are complete and working, remind Abdul about the teaching walkthrough, resume update, and Flex fintech application.
@@ -87,7 +91,7 @@ Use a separate lightweight API environment. This installs the existing serving m
 
 ```powershell
 python -m venv .venv-api
-.\.venv-api\Scripts\python.exe -m pip install setuptools==80.9.0 -r backend\requirements.lock.txt
+.\.venv-api\Scripts\python.exe -m pip install setuptools==84.2.1 -r backend\requirements.lock.txt
 .\.venv-api\Scripts\python.exe -m pip install --no-deps --no-build-isolation .
 $buildRecord = Get-Content -Raw generated\backend\release\preparation.json | ConvertFrom-Json
 $releaseDir = $buildRecord.releaseDirectory

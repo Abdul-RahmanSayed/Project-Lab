@@ -155,6 +155,7 @@ class FailureTests(unittest.TestCase):
         with tempfile.TemporaryDirectory(dir=SETTINGS.release_directory.parent.parent) as temp:
             target = Path(temp) / "corrupt"
             shutil.copytree(SETTINGS.release_directory, target)
+            (target / "saved-overview.json").chmod(0o600)
             (target / "saved-overview.json").write_bytes(b"{}")
             candidates.append(replace(SETTINGS, release_directory=target))
             for candidate in candidates:
@@ -175,6 +176,8 @@ class FailureTests(unittest.TestCase):
             target = Path(temp) / "shape"
             shutil.copytree(SETTINGS.release_directory, target)
             path = target / "saved-overview.json"
+            path.chmod(0o600)
+            (target / "release.json").chmod(0o600)
             payload = json.loads(path.read_bytes())
             payload["overview"]["ageHistogram"] = []
             write_json(path, payload)

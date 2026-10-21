@@ -1,0 +1,16 @@
+{
+  "formatVersion": 1,
+  "releaseId": "fda-release-sha256:18446003726ef6cb89bbb5cd07a265e8cf9fb3e4585fe5774ed4f6fd18454194",
+  "archive": {
+    "name": "fda-18446003726ef6cb89bbb5cd07a265e8cf9fb3e4585fe5774ed4f6fd18454194.tar.gz",
+    "bytes": 17855778,
+    "sha256": "3895e5b06e9ea5e7432ed7e0a8c58efe85024b2fda32ac5f235d25319d7e6ba1"
+  },
+  "files": {
+    "release.json": { "bytes": 1003, "sha256": "cc072857380a49b4ae7736283d7930637e9f7d876ecde49318d2a8f0387628ba" },
+    "fda.sqlite3": { "bytes": 62152704, "sha256": "bdfd771ede151a2784a83ff1e9ba1faad727491cce2bddf73a0499521b4d475f" },
+    "metadata.json": { "bytes": 4603, "sha256": "421c7fa9aba2562393741feba5acc88b73d687b357b114b42e302ecba44d00f7" },
+    "page-inventory.json": { "bytes": 183563, "sha256": "4065aadcf2c6590c86f32c5e3d6e8a12b02a8c36d91f316e029b80412d6c470b" },
+    "saved-overview.json": { "bytes": 12806, "sha256": "d0d96e17acc537d156a3c7e7db5c5d0273067f6912e412a3feb79a549eda336a" }
+  }
+}
