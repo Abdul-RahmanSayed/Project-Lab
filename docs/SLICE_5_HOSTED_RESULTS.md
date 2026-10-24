@@ -3,8 +3,11 @@
 October 21, 2026. **Partial backend milestone, not completed Slice 5 acceptance.**
 The public data attachment, one Render Free API and GitHub Pages frontend exist.
 Bounded actual-browser flows and a same-data backend rollback rehearsal pass.
-Hosted peak-memory observation, genuine idle wake and complete visual verification
-still need their recorded checks. Restoration is a same-data rehearsal, not a
+The subsequent [opt-in log follow-up](SLICE_5_MEMORY_LOG_RESULTS.md) records hosted
+memory and a second bounded HTTPS run. The [October 23 recovery record](SLICE_5_RECOVERY_RESULTS.md)
+adds diagnostic cleanup, controlled outage recovery and desktop/mobile visuals.
+Confirmed natural sleep/wake also passed in that follow-up; portfolio integration
+and final acceptance remain open. Restoration is a same-data rehearsal, not a
 cross-version migration test.
 The portfolio is unchanged.
 
@@ -168,7 +171,16 @@ Abdul subsequently authorized the small opt-in log. Its implementation and local
 verification are recorded in [memory log results](SLICE_5_MEMORY_LOG_RESULTS.md):
 nine focused tests, 12 installed Linux API regressions and bounded HTTP parity
 pass. Local cgroup peak with logging was 130.02 MiB under 512,000,000 bytes.
-The change is not yet pushed/deployed; this does not establish Render memory use.
+That local result alone does not establish Render memory use. Abdul subsequently
+pushed complete revision `5a76fbe`, which was deployed to the existing Free service
+with diagnostics enabled as `dep-dbc825bbc2fs73bk2t50`. The bounded hosted rerun
+passed all 11 fixtures and warm default 50/50 at p95 151.93 ms / maximum 155.48 ms.
+The retained host counters report process RSS high-water 99.96 MiB, resolved cgroup
+peak 89.20 MiB and group limit 512 MiB. See the follow-up for exact bytes,
+sample/lifetime/accounting limits and evidence paths. On October 23 the flag was
+saved to zero and the existing image redeployed successfully; the fresh filtered
+query passed. The [recovery results](SLICE_5_RECOVERY_RESULTS.md) record actual
+controlled unavailability, restoration and new mobile visual evidence.
 
 ### Restored Browser Follow-Up
 
@@ -260,12 +272,13 @@ before another bounded idle/browser trial; do not repeat blind requests or upgra
 
 ### Open Gates
 
-- Complete hosted visual verification and honest failure/version fallback checks;
-  the bounded browser flows above do not imply every interaction was exercised.
-- Record provider resource observations with honest sampling/peak limits; no actual
-  hosted memory peak has been measured yet.
-- Observe genuine idle sleep and cold recovery without pings; distinguish warm p95
-  from wake-up and use bounded attempts/manual Retry.
+- Bounded desktop/mobile visuals and actual outage fallback/recovery now pass;
+  the recovery record retains the resume/restart limitation. This does not imply
+  every browser, physical device or accessibility interaction was exercised.
+- Diagnostic cleanup and the bounded resource measurement pass with their stated
+  limits; see the recovery follow-up for the provider resume limitation.
+- Confirmed natural idle sleep and browser recovery now pass in the October 23
+  follow-up. A single cold observation remains separate from warm request p95.
 - Obtain the separate portfolio-edit approval, add/test its narrow Live Demo link
   and confirm the portfolio home makes no FDA API/data requests.
 

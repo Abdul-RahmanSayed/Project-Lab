@@ -2,8 +2,11 @@
 
 October 21, 2026. Abdul authorized restoring browser access and using a small,
 opt-in memory log to continue verification without paid tooling. The diagnostic
-is implemented and checked locally. **It has not been pushed or deployed to Render;
-actual hosted memory acceptance remains open.**
+is implemented and checked locally. The October 21 hosted follow-up below records
+the subsequently pushed/deployed revision and measured counters. The October 23
+recovery record confirms diagnostic disable/restart and controlled outage recovery;
+the recovery record also confirms natural idle sleep/wake. Portfolio acceptance
+and final completion remain open.
 
 ## Change
 
@@ -113,9 +116,67 @@ checks with new mobile visual evidence. Dashboard events did not establish a
 sleeping state, and reopening the default page was already ready; natural idle
 wake and actual unavailable-backend browser recovery remain unverified.
 
-Abdul retains commit/push ownership. After he pushes the reviewed change, record
+The original local handoff was: Abdul retains commit/push ownership. After he pushes the reviewed change, record
 its exact commit, manually deploy it to the existing Free service with
 `FDA_MEMORY_LOG=1`, run the bounded hosted checks, and inspect its memory lines.
 Then set the flag back to `0` and verify the restarted service. No Pages rebuild
 is needed for this backend-only change. Auto-deploy remains off. No paid tooling,
 new service, portfolio edit or completion reminder is authorized by this step.
+
+## October 21 Hosted Measurement; October 23 Evidence Review
+
+Abdul pushed the complete change as
+`5a76fbec6a1f51bbbdd490e9f1bfdb50668ebf55`. The preceding `d6745d1` omitted
+four new files, including the imported logger; it was caught before deployment
+and was never selected for a Render deployment. The complete revision was
+manually deployed with `FDA_MEMORY_LOG=1` to the existing Free service as
+`dep-dbc825bbc2fs73bk2t50`; the dashboard reported success in 35.1 seconds.
+The build fetched and validated the existing checked archive and retained its
+release ID. No Pages build or database/policy/query pin changed.
+
+The bounded HTTPS harness completed successfully. Metadata/provenance, allowed
+and disallowed Origin headers, the 409 release mismatch and all 11 overview
+fixtures passed. Report/detail coverage remains 834 IDs, 14 page requests and
+nine sampled details, with the same partial-pagination limits as earlier runs.
+
+| Hosted HTTPS scenario | Success / requests | p95 | Maximum |
+| --- | --- | --- | --- |
+| Default, ten five-reader waves | 50 / 50 | **151.93 ms** | 155.48 ms |
+| Repeated uncached | 10 / 10 | 2,524.65 ms | 2,524.65 ms |
+| Mixed uncached | 10 / 10 | 1,700.36 ms | 1,700.36 ms |
+| Defaults mixed with filtered work | 10 / 10 | 901.93 ms | 901.93 ms |
+| Ten-request SQL burst | 5 / 10; five busy 503 | 2,002.17 ms, all requests | 2,002.17 ms |
+
+The warm five-reader default passes the p95-below-ten-seconds requirement with
+logging enabled. This includes verified HTTPS and complete response receipt,
+not browser rendering or sleep/wake latency. Small filtered samples establish
+no universal filtered SLA, and these are not controlled speed comparisons.
+
+The visible Render application log retained 50 JSON counter lines, ending at
+request sample 127 / worker uptime 48.908 seconds. At that point the worker's
+process RSS high-water was **104,816,640 bytes (99.96 MiB)** and its resolved
+cgroup lifetime peak was **93,536,256 bytes (89.20 MiB)**. The cgroup reported
+`memory.max=536870912` (**512 MiB**). The retained final high-water readings
+include the earlier work in this process/group lifetime even though the UI
+only exposed the last 50 lines; no claim of complete log export is made.
+
+Both observed peaks are below the reported group limit; RSS is also below the
+baseline's 350 MiB process target. Process RSS and cgroup charging use different
+accounting rules and are not interchangeable or necessarily ordered. These
+readings are actual host observations for this bounded workload, not an
+independent audit of ancestor/provider enforcement, OOM events or future load.
+No independent hosted OOM-event counter or shutdown sample was captured.
+
+Ignored evidence is under `generated/deployment/hosted-memory-20261021`:
+`results.json` and `render-visible-logs.txt`. The attempted clipboard export
+produced an empty `render-copied-logs.txt`; it is not measurement evidence.
+These files were inspected again on October 23 without rerunning the workload.
+
+The previous session reached editing the diagnostic flag to `0` but did not
+complete saving/restarting it. On October 23, inspection confirmed it was still
+`1`; it was saved as `0` and applied by successful same-image deployment
+`dep-dbdretjrjlhs7384useg`. The fresh public filtered query matched 149/123/26.
+The [recovery follow-up](SLICE_5_RECOVERY_RESULTS.md) records cleanup, controlled
+outage behavior, provider routing limitations, restoration and new mobile evidence.
+The same record now confirms natural idle sleep/wake. Portfolio approval and
+final completion remain ahead.

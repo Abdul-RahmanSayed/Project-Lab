@@ -219,3 +219,78 @@ Abdul retains commit/push ownership. The next diagnostic deployment requires his
 pushed commit; it has not happened. Use only the existing Free service, restore
 the log flag to zero after bounded measurement, and retain separate approval for
 portfolio edits. The MVP and completion follow-ups remain pending.
+
+## October 23, 2026: Resume Hosted Acceptance From Saved Evidence
+
+The October 21 complete pushed revision `5a76fbe` was manually deployed to the
+existing Render Free service with the approved bounded diagnostic enabled.
+Deployment `dep-dbc825bbc2fs73bk2t50` succeeded. Its bounded HTTPS checks passed
+all 11 parity fixtures and the warm default gate: 50/50 successes, p95 151.93 ms,
+maximum 155.48 ms. Repeated/mixed uncached selections passed and the SQL burst
+retained five explicit busy responses. Data/policy/query pins remain fixed.
+
+Retained host logs show process RSS high-water 99.96 MiB and resolved cgroup peak
+89.20 MiB against a reported 512 MiB group limit. These are different accounting
+measures, not a full independent enforcement/OOM audit. The UI exposed 50 lines
+ending at sample 127; its lifetime high-water counters include earlier work.
+The [memory follow-up](SLICE_5_MEMORY_LOG_RESULTS.md) records exact values/limits.
+
+The previous session stopped before confirming that the zero flag was saved and
+applied to a restarted worker. Resume with that inspection/cleanup, then complete
+sleep/unavailable browser recovery. No whole-suite rerun is implied by this
+evidence review. Portfolio editing still requires the separate approval and
+the MVP/completion reminders remain pending.
+
+The resumed session confirmed the actual flag was still `1`, saved it to `0`
+and applied the existing image as successful deployment
+`dep-dbdretjrjlhs7384useg` (11.1 seconds). A fresh browser CARROTS request
+returned 149/123/26. A short reversible suspension then verified actual hosted
+default/custom/previous-result fallback. Resume initially left filtered routes
+returning provider suspension HTML despite readiness; one service restart and
+manual Retry restored the expected default, custom and empty selections. The
+root cause of that provider routing inconsistency remains unknown.
+
+New 390x844 viewport screenshots and report-detail scrolling checks passed, and
+the override was reset. All FDA tabs were then closed for a single natural idle
+trial beginning at 19:46:46.762 UTC. See the [recovery record](SLICE_5_RECOVERY_RESULTS.md)
+for exact evidence, the distinction between outage and sleep, and pending gates.
+
+The first trial showed saved-first browser recovery after an idle interval, but a
+Cloudflare challenge on the command-line non-waking probe prevented affirmative
+sleep evidence. One final trial used the normal browser for that probe. At
+20:51:52.153 UTC it displayed Render's documented sleeping-service robots response
+after 29 minutes 55 seconds without agent API traffic. The subsequent default
+visit retained its labeled saved overview, was still Connecting at 14.159 seconds,
+and API ready by the next observation at 46.671 seconds. A new CARROTS query then
+returned 149/123/26. No manual Retry was needed for that particular cold visit.
+
+This satisfies the bounded natural sleep/wake check, with observation bounds and
+one-trial limitations kept separate from warm request p95. No more idle trials,
+new cache/queue, retry changes or runtime implementation work is needed at this
+milestone. The service is resumed, logging is off, the mobile override is reset
+and the filtered demo is left open. The concrete two-field portfolio proposal is
+documented for separate approval; final acceptance and completion reminders still
+depend on that integration and verification. No portfolio edit, commit or push
+was made by the agent.
+
+## October 23, 2026: Approved Local Portfolio Integration
+
+Abdul approved enabling the existing FDA Live Demo link and appending the exact
+saved-snapshot Explorer sentence, with local checks only and commit/push retained
+by him. The production React portfolio was clean on `master`; the local review
+branch `codex/fda-explorer-link` now has only the two approved lines changed in
+`artifacts/portfolio/src/components/ProjectsSection.tsx`. Existing attribution,
+claims, source link, dependencies and publishing workflow are unchanged.
+
+Frozen-lockfile installation, TypeScript checking and the production build pass.
+Isolated desktop/mobile browser checks confirm the exact new anchor and sentence,
+usable card/action layout and no page exceptions. Request recording with an FDA
+blocking guard observed zero attempted Explorer/API requests during homepage
+load, scrolling and link focus/hover; no link click was included in those tests.
+See [portfolio results and limitations](SLICE_5_PORTFOLIO_RESULTS.md).
+
+The public portfolio is not changed by this local work. After Abdul's reviewed
+publication to its existing `master` deployment path, verify the real public link
+and no-FDA-request homepage behavior before final acceptance. No additional FDA
+runtime, data, cache, queue, deployment or account change is part of this step.
+The MVP and completion follow-ups remain pending.
