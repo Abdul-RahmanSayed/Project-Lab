@@ -159,8 +159,8 @@ semantic, cache, admission or deadline changes were made.
 
 The initial new-check-client failure was a mistaken reference-metadata assumption,
 not an application failure; it is retained separately from the successful run.
-Abdul chose to make the narrow Pages-workflow/test commit and push himself. The
-agent has not committed/pushed or changed the portfolio. Pages, actual browser
+Abdul chose to make the narrow Pages-workflow/test commit and push himself. That
+checkpoint did not change the portfolio. Pages, actual browser
 integration, provider resource observations, genuine idle wake and rollback remain
 unfinished. Completion follow-ups stay pending until the agreed end-to-end feature
 and separately approved portfolio integration are genuinely verified.
@@ -186,7 +186,7 @@ Genuine idle sleep/wake, remaining fallback/visual evidence and
 the separately approved portfolio integration remain open. The detailed evidence
 and small-sample limitations are in the hosted results; the MVP is not complete.
 
-After over 18 minutes without agent API requests, one timed readiness request
+After over 18 minutes without test-client API requests, one timed readiness request
 returned the correct release in 12.69 seconds. Browser automation disconnected
 during the idle wait, so the provider's asleep state and actual cold-browser
 fallback/recovery were not verified. This is a single idle-period observation,
@@ -259,7 +259,7 @@ The first trial showed saved-first browser recovery after an idle interval, but 
 Cloudflare challenge on the command-line non-waking probe prevented affirmative
 sleep evidence. One final trial used the normal browser for that probe. At
 20:51:52.153 UTC it displayed Render's documented sleeping-service robots response
-after 29 minutes 55 seconds without agent API traffic. The subsequent default
+after 29 minutes 55 seconds without test-client API traffic. The subsequent default
 visit retained its labeled saved overview, was still Connecting at 14.159 seconds,
 and API ready by the next observation at 46.671 seconds. A new CARROTS query then
 returned 149/123/26. No manual Retry was needed for that particular cold visit.
@@ -271,14 +271,14 @@ milestone. The service is resumed, logging is off, the mobile override is reset
 and the filtered demo is left open. The concrete two-field portfolio proposal is
 documented for separate approval; final acceptance and completion reminders still
 depend on that integration and verification. No portfolio edit, commit or push
-was made by the agent.
+was made during that verification.
 
 ## October 23, 2026: Approved Local Portfolio Integration
 
 Abdul approved enabling the existing FDA Live Demo link and appending the exact
 saved-snapshot Explorer sentence, with local checks only and commit/push retained
 by him. The production React portfolio was clean on `master`; the local review
-branch `codex/fda-explorer-link` now has only the two approved lines changed in
+branch `fda-explorer-link` has only the two approved lines changed in
 `artifacts/portfolio/src/components/ProjectsSection.tsx`. Existing attribution,
 claims, source link, dependencies and publishing workflow are unchanged.
 
@@ -294,3 +294,35 @@ publication to its existing `master` deployment path, verify the real public lin
 and no-FDA-request homepage behavior before final acceptance. No additional FDA
 runtime, data, cache, queue, deployment or account change is part of this step.
 The MVP and completion follow-ups remain pending.
+
+### Portfolio Checkpoint Before Publication
+
+Abdul pushed review branch `fda-explorer-link` at commit `c4e508d`. At that
+checkpoint, read-only remote checks showed portfolio `master` at `9a59528`.
+The public FDA card still showed the old description and disabled No Demo
+button, so publication awaited the reviewed merge into the publishing branch.
+The [portfolio record](SLICE_5_PORTFOLIO_RESULTS.md) distinguishes this fresh
+public observation from the previously passing local no-wake test. Final
+acceptance remains pending, with no new API load, cache or resource changes.
+
+## October 24, 2026: Portfolio Merge and Published Card
+
+Abdul reported merging `fda-explorer-link` into `master`. A fresh normal-browser
+visit to the public portfolio displays the approved saved-snapshot Explorer
+sentence and an enabled Live Demo anchor pointing to
+`https://abdul-rahmansayed.github.io/Project-Lab/#/fda`. This confirms publication
+of the changed card. The subsequent bounded public-homepage request check passed
+at desktop/mobile widths with zero attempted Explorer/API requests and no page
+exceptions during load, scrolling and link focus/hover. Read-only remote refs
+show `master` and the review branch at `c4e508d`.
+
+The actual Live Demo link opened the checked Explorer; after its saved-first
+connection state, a CARROTS/2024-2026 request returned 149 reports, 123 valid ages,
+26 missing/invalid ages and mean 42.95 years with the checked release in its URL.
+The [integration record](SLICE_5_PORTFOLIO_RESULTS.md) retains exact scope and
+ignored evidence paths. No new load benchmark or cold-start timing is inferred.
+No application code or provider setting changed during this verification.
+
+Portfolio integration gates pass. Final acceptance and the completion reminders
+remain pending the separate pipeline credential-file concern; no valid secret
+or successful revocation is assumed from a filename or a file-deletion commit.

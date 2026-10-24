@@ -105,7 +105,7 @@ without waking a sleeping Free service. The one pre-trial request at
 sleep at that earlier time. [Render Free behavior](https://render.com/docs/free).
 
 The eventual single command-line robots check completed at **20:09:57.486 UTC**,
-after more than 23 minutes without agent app/API requests. It received HTTP 403
+after more than 23 minutes without test-client app/API requests. It received HTTP 403
 Cloudflare challenge HTML, not Render's sleep response. No challenge was solved,
 protection bypassed or repeated command-line probe added. The dashboard Events
 page did not expose an asleep event, so this does not confirm natural sleep.
@@ -134,7 +134,7 @@ result follows. Portfolio approval and the completion follow-ups remain pending.
 ### Confirmed Natural Sleep and Browser Recovery
 
 At **20:51:52.153 UTC**, after 29 minutes 55.259 seconds with all FDA tabs closed
-and no agent API traffic, a fresh normal Chrome visit to `/robots.txt` displayed:
+and no test-client API traffic, a fresh normal Chrome visit to `/robots.txt` displayed:
 
 ```text
 User-agent: *
@@ -205,4 +205,4 @@ Explorer. The anchor itself makes no FDA API/data request when the portfolio
 home loads. This source inspection is not a built or hosted portfolio network
 test. This proposal was subsequently approved and applied locally as recorded in
 the linked integration results. No portfolio commit, push or publication was
-performed by the agent.
+performed during that verification.

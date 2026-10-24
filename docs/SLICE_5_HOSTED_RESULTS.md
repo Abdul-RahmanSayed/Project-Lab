@@ -118,7 +118,7 @@ invariant hashes unchanged. No hosted full-browser or rollback result follows.
 Abdul committed/pushed the four deployment-only files himself as
 `88430e716be101a09a3a61bd487dabc119021fec`:
 `.gitattributes`, `.github/workflows/pages.yml`, `tests/check_hosted.py` and
-`tests/test_hosted.py`. The agent has not committed or pushed.
+`tests/test_hosted.py`.
 
 [Manual Pages run 39565823387](https://github.com/Abdul-RahmanSayed/Project-Lab/actions/runs/39565823387)
 succeeded in 1 minute 9 seconds: build 20 seconds, deploy 37 seconds, 20/20 frontend
@@ -249,7 +249,7 @@ provider history or this local disk remains available forever.
 ### Idle-Period Observation, Not Verified Cold-Browser Acceptance
 
 After the post-rollback CARROTS query succeeded, the test browser tab was closed.
-At 08:11:11 UTC the agent began its no-backend-request interval. Static Pages files
+At 08:11:11 UTC the no-backend-request interval began. Static Pages files
 and provider dashboard checks during the interval did not intentionally contact
 the API. The frontend source has no recurring API polling/keep-awake timer.
 Other public visitors and provider health checks were not controlled.
