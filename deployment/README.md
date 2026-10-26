@@ -1,8 +1,6 @@
 # Local Deployment Preparation
 
-Approved for local work after the [Slice 5A proposal](../docs/SLICE_5_DEPLOYMENT_PROPOSAL.md).
-See [Slice 5B results](../docs/SLICE_5_LOCAL_PREPARATION_RESULTS.md) for measured evidence
-and unperformed checks. Nothing in these files creates accounts or deploys a service.
+Nothing in these files creates accounts or deploys a service.
 Do not publish an archive/image, change GitHub visibility/Pages settings, provision
 Render or edit the portfolio without the relevant approval.
 
@@ -28,8 +26,8 @@ excludes Git metadata, source data, virtual environments, test certificates,
 frontend files and unrelated generated output. The final image copies only the
 installed Python environment, checked release and deployment lock, not a second
 copy of the compressed archive. The October 21 Docker Desktop/WSL2 follow-up built
-and checked this image under local Linux constraints; see [measured results](../docs/SLICE_5_LINUX_RESULTS.md).
-This does not accept public-runtime security, a public-source rebuild or hosted behavior.
+and checked this image under local Linux constraints.This does not accept 
+public-runtime security, a public-source rebuild or hosted behavior.
 
 ## Package and Check the Existing Release
 
@@ -83,10 +81,10 @@ read from Docker Hub. It contains OpenSSL 3.0.22; SQLite remains the Bookworm bu
 Builder pip 26.2.2/setuptools 84.2.1 wheels are hash-pinned. Both installed
 interpreters in the final image have no importable pip/setuptools. The API's root
 build metadata uses the refreshed setuptools pin; serving dependencies and all
-release/data/policy/query pins remain unchanged. See the [refresh results](../docs/SLICE_5_RUNTIME_REFRESH_RESULTS.md).
-This is not a full native-library security clearance or hosted acceptance.
-Reconcile future runtime updates with existing pins; do not change policies or
-regenerate the dataset silently. [Docker pinning guidance](https://docs.docker.com/build/building/best-practices/#pin-base-image-versions).
+release/data/policy/query pins remain unchanged. This is not a full native-library 
+security clearance or hosted acceptance. Reconcile future runtime updates with 
+existing pins; do not change policies or regenerate the dataset silently. 
+[Docker pinning guidance](https://docs.docker.com/build/building/best-practices/#pin-base-image-versions).
 
 ### Repeat the Bounded Linux Check
 
@@ -145,8 +143,7 @@ The harness captures the final shutdown log before removing its own container.
 Unavailable/unlimited counters are `null`, not zero. RSS and cgroup memory are
 different measures; cgroup peaks may include startup, descendants and file cache.
 The resolved group's limit does not establish an ancestor/provider limit. A
-graceful final sample is not guaranteed after abrupt termination. See the
-[measured local results and limits](../docs/SLICE_5_MEMORY_LOG_RESULTS.md).
+graceful final sample is not guaranteed after abrupt termination.
 
 After the reviewed code is pushed and manually deployed to the existing Free
 service, enable `FDA_MEMORY_LOG=1` for bounded hosted verification. Record the

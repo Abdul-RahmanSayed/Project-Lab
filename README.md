@@ -1,35 +1,13 @@
 # Project Lab
 
-Implementation workspace for the FDA Explorer plan. The agreed MVP in Slices 1-5 is complete and accepted on October 25, 2026, with the documented limits and user-accepted unverified credential-revocation risk in the [closeout review](docs/MVP_ACCEPTANCE_REVIEW.md). Slices 1 and 2 established local feasibility, a packaged canonical policy core, and reproducible read-only database releases. Slice 3 adds a small modular FastAPI backend. Slice 4 adds the React/TypeScript/D3 frontend with shared filters, accessible aggregate views, report browsing and truthful snapshot/request states. Slice 5 publishes the approved checked archive, one Render Free API and the [Pages frontend](https://abdul-rahmansayed.github.io/Project-Lab/#/fda), with verified portfolio integration. Bounded hosted HTTPS parity/performance, actual memory observations, desktop/mobile browser flows, controlled outage recovery, confirmed natural sleep/wake and same-data backend/frontend recovery rehearsals pass with documented limits. Security/licensing limitations remain documented, not universally cleared. Hosting must remain $0. Slice 6 expansion is outside the completed MVP and has not been implemented.
+Implementation workspace for the FDA Explorer plan. Slices 1 and 2 established local feasibility, a packaged canonical policy core, and reproducible read-only database releases. Slice 3 adds a small modular FastAPI backend. Slice 4 adds the React/TypeScript/D3 frontend with shared filters, accessible aggregate views, report browsing and truthful snapshot/request states. Slice 5 publishes the approved checked archive, one Render Free API and the [Pages frontend](https://abdul-rahmansayed.github.io/Project-Lab/#/fda), with verified portfolio integration. Bounded hosted HTTPS parity/performance, actual memory observations, desktop/mobile browser flows, controlled outage recovery, confirmed natural sleep/wake and same-data backend/frontend recovery rehearsals pass with documented limits. Security/licensing limitations remain documented, not universally cleared. Hosting must remain $0. Slice 6 expansion is outside the completed MVP and has not been implemented.
 
 The Explorer follows the portfolio's default dark visual style and typography. The separately approved portfolio Live Demo link and one-sentence description extension were checked on `fda-explorer-link` and merged by Abdul into `master`. Public desktop/mobile homepage checks attempted no FDA requests, and the actual demo-link flow returned the expected filtered result. The remaining uncertainty about the old ingestion key is an explicitly accepted risk, not a verified revocation or a blocker to this scoped MVP closeout.
 
 ## Documentation
 
-- [Teaching walkthrough](docs/FDA_EXPLORER_CODE_WALKTHROUGH.md): high-level features, plain-language terminology, detailed execution/data flow, source references and evidence boundaries.
-- [MVP acceptance review and October 25 closeout](docs/MVP_ACCEPTANCE_REVIEW.md): agreed Slices 1-5 complete, evidence boundaries retained, and unverified old-key revocation explicitly accepted as a remaining risk.
-- [Baseline plan](docs/FDA_DASHBOARD_PLAN.md): unchanged copy of the supplied October 8 plan.
-- [Slice 1 assumptions and behavior contract](docs/SLICE_1_ASSUMPTIONS.md).
-- [Slice 1 measured results](docs/SLICE_1_RESULTS.md).
-- [Slice 2 measured results and remaining performance gate](docs/SLICE_2_RESULTS.md).
-- [Later decisions and current performance expectations](docs/FDA_EXPLORER_DECISIONS.md): the user-approved default-overview threshold supersedes the plan's provisional two-second target.
-- [Prepared-default performance follow-up](docs/PERFORMANCE_FOLLOWUP_RESULTS.md): the local default path passes; standby-affected runs and filtered costs are retained and qualified.
-- [October 15 results review](docs/RESULTS_REVIEW_2026-10-15.md): historical review and then-blocked release access; access was restored during Slice 3.
-- [Approved smaller backend scope](docs/SLICE_3_SCOPE.md): October 20 decisions and deliberate simplifications.
-- [Implemented API contract](docs/API_CONTRACT_IMPLEMENTED.md): requests, response models, paging, limits and failure behavior.
-- [Slice 3 results](docs/SLICE_3_RESULTS.md): correctness, actual HTTP timings, resource use, release access and remaining limitations.
-- [Approved Slice 4 scope](docs/SLICE_4_SCOPE.md) and [local frontend results](docs/SLICE_4_RESULTS.md).
-- [Slice 5A hosting review and deployment proposal](docs/SLICE_5_DEPLOYMENT_PROPOSAL.md): published limits, account checks and proposed setup; local preparation was subsequently approved, while external actions/hosted acceptance remain pending.
-- [Slice 5B local preparation results](docs/SLICE_5_LOCAL_PREPARATION_RESULTS.md) and [deployment guide](deployment/README.md): archive/container/origin wiring and local HTTPS evidence, with Linux/hosted limits explicit.
-- [October 21 Linux follow-up](docs/SLICE_5_LINUX_RESULTS.md): checked container build, representative Python-reference parity, five-client HTTP measurements and memory within 0.1 CPU/512 MB; hosted/security checks remain pending.
-- [Local runtime refresh](docs/SLICE_5_RUNTIME_REFRESH_RESULTS.md): Python/base and hash-pinned build-tool maintenance, packaging-tool removal, Linux API regressions and repeated constrained HTTP/resource checks; no deployment or full-image security clearance.
-- [Historical hosted acceptance record](docs/SLICE_5_HOSTED_RESULTS.md): approved public archive, Free API and Pages frontend, initial HTTPS/browser/recovery evidence; later follow-ups and the closeout review resolve the milestone's functional gates.
-- [Opt-in memory log follow-up](docs/SLICE_5_MEMORY_LOG_RESULTS.md): local checks plus actual Render memory and HTTPS parity/performance evidence, with diagnostic cleanup linked to the later recovery record.
-- [Hosted recovery follow-up](docs/SLICE_5_RECOVERY_RESULTS.md): logging disabled, actual provider outage/fallback and recovery, mobile screenshots and confirmed natural sleep/wake; subsequent portfolio verification is recorded separately.
-- [Portfolio integration results](docs/SLICE_5_PORTFOLIO_RESULTS.md): approved two-line edit, passing local typecheck/build, subsequent public desktop/mobile no-FDA-request checks and actual demo-link flow; the final scope/risk decision is linked to the closeout review.
+- [Navigation and light/dark follow-up](web/README.md#navigation-and-theme-checks): local return navigation, shared appearance preferences, contrast and browser checks; not yet published.
 - [Frontend guide](web/README.md): run/build/test commands, release-bound saved data, selection state and request handling.
-- [Historical FastAPI draft](docs/FASTAPI_CONTRACT.md): superseded where the approved smaller scope differs, including unsigned bookmarks and no application waiting queue.
-- [Completion follow-ups](docs/COMPLETION_FOLLOWUPS.md): after all slices are complete and working, remind Abdul about the teaching walkthrough, resume update, and Flex fintech application.
 
 ## Reproduce Locally
 
@@ -72,13 +50,13 @@ The historical SQL-only benchmark applies a Windows Job Object hard CPU cap of a
 .\.venv\Scripts\python.exe -B data-build\profile.py --database "$releaseDir\fda.sqlite3" --output generated\rerun\profile-constrained.json --constrained --iterations 5 --clients 5
 ```
 
-The original two-second target is historical, not a current requirement. The user now requires **warm request latency p95 strictly below ten seconds for the default all-year overview with five simultaneous requesters**, within the actual free compute/memory/storage limits. The historical SQL-only default p95 was 13.05 seconds. Maximum latency remains a diagnostic metric, not the acceptance threshold. See the [decision record](docs/FDA_EXPLORER_DECISIONS.md). Preparation belongs offline, not in the constrained service process.
+The original two-second target is historical, not a current requirement. The user now requires **warm request latency p95 strictly below ten seconds for the default all-year overview with five simultaneous requesters**, within the actual free compute/memory/storage limits. The historical SQL-only default p95 was 13.05 seconds. Maximum latency remains a diagnostic metric, not the acceptance threshold. Preparation belongs offline, not in the constrained service process.
 
 ## Prepared Default Reuse
 
 `data-build/runtime.py` validates the existing release once, verifies the query-code pin, and keeps one immutable, labeled default response. Only the exact all-year/no-product selection uses those prepared bytes. Changed filters still use the existing read-only SQL path and keep the raw search, counting, normalization, and age policies. Every response explicitly describes a saved data snapshot, not live FDA data. This runtime adapter has no filtered-response cache; the later HTTP backend adds the five-job work limit described below.
 
-The historical controlled short run measured default p95 **2.08 ms**, mixed uncached SQL p95 **8.91 seconds**, and constrained process peak **76.63 MiB**, before HTTP handling existed. Two longer runs overlapped Modern Standby and are retained as qualified evidence. Do not compare these directly with the [Slice 3 HTTP results](docs/SLICE_3_RESULTS.md) as a controlled speedup experiment.
+The historical controlled short run measured default p95 **2.08 ms**, mixed uncached SQL p95 **8.91 seconds**, and constrained process peak **76.63 MiB**, before HTTP handling existed. Two longer runs overlapped Modern Standby and are retained as qualified evidence.
 
 After creating `$releaseDir` above, run the new tests and independent verification, then profile:
 
@@ -124,7 +102,7 @@ Run after the data preparation and API installation above. Tests require the sep
 .\.venv-api\Scripts\python.exe -B -m backend.benchmark --release-directory $releaseDir --release-id $releaseId --output-directory generated\backend\http-constrained-final --rounds 10 --constrained --port 8876
 ```
 
-The benchmark starts and stops its own local server. The constrained run applies approximately 0.1 CPU core and a 512 MiB committed-memory cap to that server only, and temporarily prevents idle sleep. Ten five-client waves produce 50 observations per main scenario. Timing includes dispatch, HTTP handling, query work, validation, encoding and receiving the full body. Busy responses are counted separately, never disguised as fast successful queries. This still excludes browser rendering, internet transfer, service wake-up and actual hosted scheduling. See the [results](docs/SLICE_3_RESULTS.md) before drawing hosting conclusions.
+The benchmark starts and stops its own local server. The constrained run applies approximately 0.1 CPU core and a 512 MiB committed-memory cap to that server only, and temporarily prevents idle sleep. Ten five-client waves produce 50 observations per main scenario. Timing includes dispatch, HTTP handling, query work, validation, encoding and receiving the full body. Busy responses are counted separately, never disguised as fast successful queries. This still excludes browser rendering, internet transfer, service wake-up and actual hosted scheduling. 
 
 ## Run the Local Frontend
 

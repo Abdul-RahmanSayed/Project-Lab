@@ -1,4 +1,5 @@
 :root {
+  color-scheme: dark;
   /* Portfolio dark palette, with stronger control borders and semantic accents. */
   --page: hsl(240 25% 6%);
   --surface: hsl(240 20% 8%);
@@ -26,4 +27,30 @@
   --error: #ffabb9;
   --font-sans: 'Inter Variable', 'Segoe UI', Arial, sans-serif;
   --font-mono: 'JetBrains Mono Variable', Consolas, monospace;
+}
+
+:root:not(.dark) {
+  color-scheme: light;
+  --page: hsl(240 33% 97%);
+  --surface: #ffffff;
+  --ink: hsl(240 20% 10%);
+  --muted: #56566d;
+  --line: #d9d6e7;
+  --control-border: #807a99;
+  --hover: #eeedf5;
+  --primary: #655be8;
+  --link: #5146c7;
+  --teal: #00806c;
+  --success: #0d7465;
+  --coral: #ae543e;
+  --products: #00806c;
+  --outcomes: #916511;
+  --reactions: #6855bd;
+  --partial: #916511;
+  --focus: #4f44ba;
+  --info-bg: #ebe8fc;
+  --info-ink: #3f3479;
+  --warning-bg: #fff3d9;
+  --warning-ink: #7b500f;
+  --error: #af2344;
 }

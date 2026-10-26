@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { Activity, Check, ChevronDown, Copy, Database, Filter, Info, PanelsTopLeft, RotateCcw, RotateCw, Search } from 'lucide-react';
+import { Check, ChevronDown, Copy, Database, Filter, Info, RotateCcw, RotateCw, Search } from 'lucide-react';
+import { Header } from './Header';
 import { connect, errorMessage, getOverview } from './api';
 import { bundledMetadata, savedOverview } from './contracts';
 import { OverviewCharts } from './charts';
@@ -91,7 +92,7 @@ export default function App() {
   const statusClass = apiStatus === 'API ready' ? 'ready' : apiStatus === 'Connecting' ? 'starting' : 'unavailable';
   return <>
     <a className="skip-link" href="#main" onClick={event => { event.preventDefault(); document.getElementById('main')?.focus(); }}>Skip to FDA Explorer</a>
-    <header className="app-header"><div className="header-inner"><div className="brand"><PanelsTopLeft size={21} aria-hidden /><span>Project Lab</span><span className="brand-divider">/</span><span>FDA Explorer</span></div><span className={`api-status ${statusClass}`}><Activity size={14} aria-hidden />{apiStatus}</span></div></header>
+    <Header status={apiStatus} statusClass={statusClass} />
     <main id="main" tabIndex={-1}>
       <header className="page-heading"><div><h1>FDA Explorer</h1><p className="dataset-line">Food adverse-event reports <span>/</span> {date(metadata.metadata.coverageStart)} - {date(metadata.metadata.coverageEnd)}</p></div><div className="heading-tools"><span className="snapshot-badge"><Database size={14} aria-hidden />Saved snapshot</span><IconButton label="Copy view link" onClick={async () => { try { await navigator.clipboard.writeText(location.href); setCopied(true); } catch { setCopyError(true); } }}>{copied ? <Check size={18} /> : <Copy size={18} />}</IconButton></div></header>
       <p className="interpretation">These are reports, not unique people. They do not establish causation, incidence, relative risk or product safety.</p>
